@@ -6,6 +6,8 @@ public:
 	Unit();
 	~Unit();
 	void heal();
+	bool valid_move();
+	bool valid_attack();
 	void attack(Unit& target);
 
 protected:
