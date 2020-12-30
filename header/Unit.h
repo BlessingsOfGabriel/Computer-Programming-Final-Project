@@ -6,8 +6,9 @@ public:
 	Unit();
 	~Unit();
 	void heal();
-	bool valid_move();
-	bool valid_attack();
+	void move();
+	virtual bool valid_move(int posX, int posY);
+	virtual bool valid_attack(int posX, int posY);
 	void attack(Unit& target);
 
 protected:
