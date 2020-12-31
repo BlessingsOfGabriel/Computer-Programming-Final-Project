@@ -7,7 +7,7 @@ class Obj{
 		int getHeight();
 		int getWidth();
 		void loadTexture(std::string);
-		virtual void resize(int newHeight, int new Width);
+		virtual void resize(int newHeight, int newWidth);
 		void free();
 	protected:
 		int _height, _width;
