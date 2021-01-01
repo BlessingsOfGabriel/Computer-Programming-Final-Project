@@ -11,10 +11,7 @@ Unit::~Unit(){};
 void Unit::heal(){};
 
 bool Unit::valid_move(int posX,int posY){
-    if((abs(posX-_xPos)+abs(posY-_yPos))<=_max_move)
-        return true;
-    else
-        return false;
+    return true;
 }
 
 void Unit::move(int posX,int posY){
