@@ -6,7 +6,7 @@ public:
 	Unit();
 	~Unit();
 	void heal();
-	void move();
+	void move(int posX,int posY);
 	virtual bool valid_move(int posX, int posY);
 	virtual bool valid_attack(int posX, int posY);
 	void attack(Unit& target);
