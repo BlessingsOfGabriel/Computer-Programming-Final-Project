@@ -3,9 +3,11 @@
 #include "Obj.h"
 class status: public Obj{
 public:
-	int calculate_gpt(); 
+	int calculate_gpt();
+	void turn_plus();
 protected:
 	int _goldPerTurn;
-	int _gold_amount;
+	int _goldAmount;
+	int _turn;
 };
 #endif
