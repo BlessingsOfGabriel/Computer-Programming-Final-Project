@@ -10,7 +10,6 @@ public:
 	virtual bool valid_move(int posX, int posY);
 	virtual bool valid_attack(int posX, int posY);
 	void attack(Unit& target);
-	void printInfo();
 
 protected:
 	int _max_health;
@@ -19,5 +18,6 @@ protected:
 	int _heal_value;
 	int _max_move;
 	int _move;
+	bool _faction;
 };
 #endif
