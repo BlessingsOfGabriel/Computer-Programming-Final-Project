@@ -24,7 +24,7 @@ enum GameState {
 
 
 enum ButtonType {
-    Start, Restart, Buy, EndTurn
+    Start, Restart, Buy, EndTurn, Common
 };
 
 enum UnitType {

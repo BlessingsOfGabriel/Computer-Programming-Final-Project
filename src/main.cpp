@@ -12,9 +12,9 @@ int LEVEL_HEIGHT = 2000;
 int SCREEN_FPS = 60;
 int SCREEN_TICK_PER_FRAME = 1000 / SCREEN_FPS;
 GameState gameState;
-UnitType unitName[]{};
-Button* start;
-Button* restart;
+Button* button(Start);
+pair<int, int> RESISTOR;
+pair<double, double> boardToAct(pair<int, int>);
 
 int main(int argc, char* argv[]){
 	initialize();
@@ -52,7 +52,19 @@ void loading(SDL_Event& event){
 
 }
 
-void playing(SDL_Event& event){
+void playing1(SDL_Event& event){
+	
+	while(SDL_PollEvent(&event) != 0){
+		if(e.type == SDL_QUIT) { gameState = Quit; break; }
+        else if(status1._health == 0 || statu2._health == 0) {
+            gameState = GameOver;
+            break; 
+		}
+		Button *
+	}
+}
+
+void playing2(SDL_Event& event){
 
 }
 
@@ -65,4 +77,5 @@ void store(SDL_Event& event){
 }
 
 void close() {
+
 }
