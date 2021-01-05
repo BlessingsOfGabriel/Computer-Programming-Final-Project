@@ -2,6 +2,7 @@
 #include "Obj.h"
 #include <cmath>
 #include<vector>
+#include<string>
 
 using namespace std;
 
@@ -29,7 +30,7 @@ void Status::add_Unit(Unit unit){
 void Status::delete_Unit(int x,int y){
     vector<Unit>::iterator it;
     for(it=_unitList.begin(); it!=_unitList.end() ; it++){
-        if(*it._xPos==x && *it._yPos==y)
+        if(*it._xpos==x && *it._ypos==y)
             _unitList.erase(it);
     }
 }

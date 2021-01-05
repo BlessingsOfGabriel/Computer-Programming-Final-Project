@@ -1,6 +1,7 @@
 #include "GoldTower.h"
 #include "Unit.h"
 #include "Obj.h"
+#include<string>
 
 using namespace std;
 
@@ -8,6 +9,7 @@ GoldTower::GoldTower(int fraction):Unit(fraction){
     _health = 1;
     _move = 0;
     _damage = 0;
+    _name = "GoldTower";
 }
 
 GoldTower::~GoldTower(){}
@@ -23,8 +25,8 @@ bool GoldTower:valid_attack(int posX,int posY){
 bool GoldTower:valid_pos(int posX,int posY){
     if(_fraction == 0){
         if(posX>posY){
-            _xPos = posX;
-            _yPos = posY;
+            _xpos = posX;
+            _ypos = posY;
             return true;
         }
         else
@@ -32,8 +34,8 @@ bool GoldTower:valid_pos(int posX,int posY){
     }
     else if(_fraction == 1){
         if(posX<posY){
-            _xPos = posX;
-            _yPos = posY;
+            _xpos = posX;
+            _ypos = posY;
             return true;
         }
         else

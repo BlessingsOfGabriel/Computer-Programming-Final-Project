@@ -20,5 +20,8 @@ protected:
 	int _max_move;
 	int _move;
 	int _faction;
+	int _xpos;
+	int _ypos;
+    std::string _name;
 };
 #endif

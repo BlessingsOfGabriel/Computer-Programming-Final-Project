@@ -2,6 +2,7 @@
 #include "Unit.h"
 #include "Obj.h"
 #include<cmath>
+#include<string>
 
 using namespace std;
 
@@ -9,19 +10,20 @@ Soldier::Soldier(int faction):Unit(faction){
     _health = 3;
     _damage = 1;
     _move = 2;
+    _name = "Soldier";
 }
 
 Soldier::~Soldier(){}
 
 bool Soldier::valid_move(int posX,int posY){
-    if((abs(posX-_xPos)+abs(posY-_yPos))<=_move)
+    if((abs(posX-_xpos)+abs(posY-_ypos))<=_move)
         return true;
     else
         return false;
 }
 
 bool Soldier::valid_attack(int posX,int posY){
-    if(abs(posX-_xPos)<=1 && abs(posY-_yPos)<=1)
+    if(abs(posX-_xpos)<=1 && abs(posY-_ypos)<=1)
         return true;
     else
         return false;
@@ -30,8 +32,8 @@ bool Soldier::valid_attack(int posX,int posY){
 bool Soldier::valid_pos(int posX,int posY){
     if(_fraction == 0){
         if(posX>posY){
-            _xPos = posX;
-            _yPos = posY;
+            _xpos = posX;
+            _ypos = posY;
             return true;
         }
         else
@@ -39,8 +41,8 @@ bool Soldier::valid_pos(int posX,int posY){
     }
     else if(_fraction == 1){
         if(posX<posY){
-            _xPos = posX;
-            _yPos = posY;
+            _xpos = posX;
+            _ypos = posY;
             return true;
         }
         else
