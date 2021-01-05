@@ -1,5 +1,6 @@
 #include "Status.h"
 #include "Obj.h"
+#include "global.h"
 #include <cmath>
 #include<vector>
 #include<string>
@@ -32,5 +33,52 @@ void Status::delete_Unit(int x,int y){
     for(it=_unitList.begin(); it!=_unitList.end() ; it++){
         if(*it._xpos==x && *it._ypos==y)
             _unitList.erase(it);
+    }
+}
+
+void Status::minus_gold(int x){
+    _goldAmount -= x;
+}
+
+bool Status::valid_buy(UnitType type){
+    switch(type){
+        case(Soldier):{
+            if(_goldAmount-2<0)
+                return false;
+            else
+                return true;
+            break;
+        }
+        case(Archer):{
+            if(_goldAmount-2<0)
+                return false;
+            else
+                return true;
+            break;
+        }
+        case(Knight):{
+            if(_goldAmount-4<0)
+                return false;
+            else
+                return true;
+            break;
+        }
+        case(Tower):{
+            if(_goldAmount-3<0)
+                return false;
+            else
+                return true;
+            break;
+        }
+        case(GoldTower):{
+            if(_goldAmount-5<0)
+                return false;
+            else
+                return true;
+            break;
+        }
+        default:
+            return false;
+            break;
     }
 }
