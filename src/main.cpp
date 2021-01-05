@@ -17,7 +17,8 @@ Button* start;
 Button* restart;
 
 int main(int argc, char* argv[]){
-	
+	initialize();
+	loadMedia();
 	SDL_Event event;
 	gameState = Menu;
 	while (gameState != Quit) {
@@ -26,7 +27,7 @@ int main(int argc, char* argv[]){
             case Menu: menu(event); break;
             case Loading: loading(event); break;
             case Playing: playing(event); break;
-			case Store: store(event)
+			case Store: store(event); break;
             case GameOver: gameover(event); break;
             default:  gameState = Quit; break;
         }
@@ -35,7 +36,7 @@ int main(int argc, char* argv[]){
 }
 
 void menu(SDL_Event* event){
-
+	
 }
 
 void loading(SDL_Event* event){
@@ -52,4 +53,7 @@ void gameover(SDL_Event* event){
 
 void store(SDL_Event* event){
 
+}
+
+void close() {
 }
