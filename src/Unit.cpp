@@ -4,14 +4,16 @@
 
 using namespace std;
 
-Unit::Unit(){};
+Unit::Unit(int faction){
+    _faction = faction;
+};
 
 Unit::~Unit(){};
 
 void Unit::heal(){};
 
 bool Unit::valid_move(int posX,int posY){
-    return true;
+    return false;
 }
 
 void Unit::move(int posX,int posY){
@@ -22,15 +24,17 @@ void Unit::move(int posX,int posY){
 }
 
 bool Unit::valid_attack(int posX,int posY){
-    return true;
+    return false;
 }
 
 void Unit::attack(Unit &target){
     if(valid_attack(target._xPos,target._yPos)){
         target._health -= _damage;
-
     }
 }
 
+bool Unit::valid_pos(int posX,int posY){
+    return false;
+}
 
 

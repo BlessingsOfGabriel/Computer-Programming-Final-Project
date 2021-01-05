@@ -2,6 +2,7 @@
 #include "Obj.h"
 #include <iostream>
 #include <cmath>
+#include<vector>
 
 using namespace std;
 
@@ -10,4 +11,11 @@ int Status::calculate_gpt(){
     _goldAmount = round(_goldPerTurn + (_gold_amount + _goldPerTurn)*0.2);
 
     return _gold_amount;
+}
+
+void Status::add_Unit(Unit unit){
+    _unitList.push_back(unit);
+}
+
+void Status::delete_Unit(int x,int y){
 }

@@ -26,3 +26,18 @@ bool Knight::valid_attack(int posX,int posY){
     else
         return false;
 }
+
+bool Archer::valid_pos(int posX,int posY){
+    if(_fraction == 0){
+        if(posX>posY)
+            return true;
+        else
+            return false;
+    }
+    else if(_fraction == 1){
+        if(posX<posY)
+            return true;
+        else
+            return false;
+    }
+}
