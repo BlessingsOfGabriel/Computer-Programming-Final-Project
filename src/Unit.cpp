@@ -4,8 +4,13 @@
 
 using namespace std;
 
+<<<<<<< HEAD
 Unit::Unit(int faction){
     _faction = faction;
+=======
+Unit::Unit(){
+	
+>>>>>>> d25a2d5d57b7df39e410b6bd367afc6cb75fc7cf
 };
 
 Unit::~Unit(){};

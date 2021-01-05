@@ -21,4 +21,3 @@ void Obj::resize(int newHeight,int newWidth){
 }
 
 void free(){};
-
