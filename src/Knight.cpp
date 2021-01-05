@@ -5,7 +5,7 @@
 
 using namespace std;
 
-Knight::Knight(){
+Knight::Knight(int fraction):Unit(fraction){
     _health = 4;
     _damage = 2;
     _move = 2;

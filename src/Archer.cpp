@@ -5,7 +5,7 @@
 
 using namespace std;
 
-Archer::Archer(){
+Archer::Archer(int fraction):Unit(fraction){
     _health = 2;
     _damage = 2;
     _move = 1;

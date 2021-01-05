@@ -5,7 +5,7 @@
 
 using namespace std;
 
-Tower::Tower{}{
+Tower::Tower{int fraction}:Unit(fraction){
     _health = 3;
     _damage = 1;
 }

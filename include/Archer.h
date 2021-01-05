@@ -5,7 +5,7 @@
 
 class Archer: public Unit{
 public:
-    Archer();
+    Archer(int);
     ~Archer();
     bool valid_move(int posX,int posY);
     bool valid_attack(int posX,int posY);

@@ -4,8 +4,10 @@
 
 using namespace std;
 
-GoldTower::GoldTower(){
+GoldTower::GoldTower(int fraction):Unit(fraction){
     _health = 1;
+    _move = 0;
+    _damage = 0;
 }
 
 GoldTower::~GoldTower(){}
