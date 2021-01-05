@@ -2,8 +2,11 @@
 #define STATUS_H
 #include "Obj.h"
 #include "Unit.h"
-class status: public Obj{
+
+class Status: public Obj{
 public:
+    Status();
+    ~Status();
 	int calculate_gpt();
 	void turn_plus();
 	void add_Unit(Unit);
