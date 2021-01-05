@@ -1,5 +1,6 @@
 #ifndef LOADMEDIA_H
 #define LOADMEDIA_H
+#include "global.h"
 
 class LoadedTexture {
     private:

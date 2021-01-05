@@ -11,6 +11,9 @@ class Obj{
 		void loadTexture(std::string);
 		virtual void resize(int newHeight, int newWidth);
 		void free();
+		void move(int posX, int posY)
+		void render(int posX, int posY);
+		void handleEvent(SDL_Event event);
 	protected:
 		int _height, _width;
 		double _xPos, _yPos;

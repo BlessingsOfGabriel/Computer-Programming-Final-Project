@@ -10,6 +10,7 @@ public:
 	void add_unit(int posX, int posY, Unit new_unit);
 	void delete_unit(int posX, int posY);
 
+
 protected:
 	Unit* _current;
 	
