@@ -2,6 +2,7 @@
 #define STATUS_H
 #include "Obj.h"
 #include "Unit.h"
+#include "global.h"
 
 class Status: public Obj{
 public:
@@ -11,6 +12,8 @@ public:
 	void turn_plus();
 	void add_Unit(Unit);
 	void delete_Unit(int,int);
+	void minus_gold(int);
+	bool valid_buy(UnitType);
 
 protected:
 	int _goldPerTurn;
