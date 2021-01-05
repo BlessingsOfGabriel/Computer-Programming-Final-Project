@@ -18,8 +18,8 @@ bool Unit::valid_move(int posX,int posY){
 
 void Unit::move(int posX,int posY){
     if(valid_move(posX,posY)){
-        _xPos = posX;
-        _yPos = posY;
+        _xpos = posX;
+        _ypos = posY;
     }
 }
 
@@ -28,7 +28,7 @@ bool Unit::valid_attack(int posX,int posY){
 }
 
 void Unit::attack(Unit &target){
-    if(valid_attack(target._xPos,target._yPos)){
+    if(valid_attack(target._xpos,target._ypos)){
         target._health -= _damage;
     }
 }

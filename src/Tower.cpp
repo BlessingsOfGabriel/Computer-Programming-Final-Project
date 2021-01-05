@@ -2,18 +2,20 @@
 #include "Unit.h"
 #include "Obj.h"
 #include <cmath>
+#include <string>
 
 using namespace std;
 
 Tower::Tower{int fraction}:Unit(fraction){
     _health = 3;
     _damage = 1;
+    _name = "Tower";
 }
 
 Tower::~Tower(){}
 
 bool Tower::valid_attack(int posX,int posY){
-    if(abs(posX-_xPos)<=1 && abs(posY-_yPos)<=1)
+    if(abs(posX-_xpos)<=1 && abs(posY-_ypos)<=1)
         return true;
     else
         return false;
@@ -22,8 +24,8 @@ bool Tower::valid_attack(int posX,int posY){
 bool Tower::valid_pos(int posX,int posY){
     if(_fraction == 0){
         if(posX>=(posY+9)){
-            _xPos = posX;
-            _yPos = posY;
+            _xpos = posX;
+            _ypos = posY;
             return true;
         }
         else
@@ -31,8 +33,8 @@ bool Tower::valid_pos(int posX,int posY){
     }
     else if(_fraction == 1){
         if((posX+9)<=posY){
-            _xPos = posX;
-            _yPos = posY;
+            _xpos = posX;
+            _ypos = posY;
             return true;
         }
         else
