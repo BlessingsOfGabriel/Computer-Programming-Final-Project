@@ -17,23 +17,19 @@ enum GameState {
     Menu,
     Loading,
     Playing,
-    Pause,
+    Store,
     GameOver,
     Quit
 };
 
 
 enum ButtonType {
-    Start, Tutorial, Option, Continue, Restart, Store, Status, Attack, Heal
+    Start, Restart, Store, Buy
 };
 
 enum UnitType {
-    
+    Soldier, Archer, Knight, Tower, GoldTower
 };
-
-/*enum ObstacleType {
-    
-};*/
 
 extern SDL_Window* gWindow;
 extern SDL_Renderer* gRenderer;
