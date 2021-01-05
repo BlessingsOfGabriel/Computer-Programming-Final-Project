@@ -19,16 +19,22 @@ bool Tower::valid_attack(int posX,int posY){
         return false;
 }
 
-bool Archer::valid_pos(int posX,int posY){
+bool Tower::valid_pos(int posX,int posY){
     if(_fraction == 0){
-        if(posX>=(posY+9))
+        if(posX>=(posY+9)){
+            _xPos = posX;
+            _yPos = posY;
             return true;
+        }
         else
             return false;
     }
     else if(_fraction == 1){
-        if((posX+9)<=posY)
+        if((posX+9)<=posY){
+            _xPos = posX;
+            _yPos = posY;
             return true;
+        }
         else
             return false;
     }
