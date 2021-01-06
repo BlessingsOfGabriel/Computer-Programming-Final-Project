@@ -82,3 +82,39 @@ bool Status::valid_buy(UnitType type){
             break;
     }
 }
+
+void status::updateStatusString()
+{
+    statusString = "";
+    vector<Unit>::iterator it;
+    for(it=_unitList.begin(); it!=_unitList.end() ; it++){
+        statusString += it.personality;
+        statusString += "\n";
+    }
+}
+
+void surface::free()
+{
+	//Free texture if it exists
+	if( surfaceTexture != NULL )
+	{
+		SDL_DestroyTexture( surfaceTexture );
+		surfaceTexture = NULL;
+		sWidth = 0;
+		sHeight = 0;
+	}
+}
+void status::updateStatusSurface()
+{
+    SDL_Color White = {255,255,255};
+    free();
+    statusRenderer = SDL_CreateRenderer( gWindow, -1, SDL_RENDERER_ACCELERATED | SDL_RENDERER_PRESENTVSYNC );
+    statusSurface = TTF_RenderText_Solid( gFont, statusString.c_str(), White );
+    surfaceTexture = SDL_CreateTextureFromSurface(surfaceRenderer, statusSurface);
+    sWidth = statusSurface->w;
+    sHeight = statusSurface->h;
+    SDL_FreeSurface(statusSurface);
+    SDL_Rect renderQuad = (==) ?{0,0, 200,1600  }:{1800,0,200,1600};
+    SDL_RenderCopy( surfaceRenderer, surfaceTexture, NULL, &renderQuad );
+    SDL_RenderPresent(surfaceRenderer);
+}

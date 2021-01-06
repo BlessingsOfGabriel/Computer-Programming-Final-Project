@@ -14,6 +14,19 @@ public:
 	void delete_Unit(int,int);
 	void minus_gold(int);
 	bool valid_buy(UnitType);
+    SDL_Renderer *surfaceRenderer = NULL;
+
+    TTF_Font* gFont = TTF_OpenFont("arial.ttf",12);
+
+    SDL_Texture *surfaceTexture;
+
+    int sWidth,sHeight;
+
+    void updateStatusString();
+
+    void free();
+
+    void updateStatusSurface();
 
 protected:
 	int _goldPerTurn;
