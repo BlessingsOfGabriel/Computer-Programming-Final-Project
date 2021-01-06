@@ -9,8 +9,6 @@ int SCREEN_WIDTH = 1200;
 int SCREEN_HEIGHT = 800;
 int LEVEL_WIDTH = 2000;
 int LEVEL_HEIGHT = 2000;
-int SCREEN_FPS = 60;
-int SCREEN_TICK_PER_FRAME = 1000 / SCREEN_FPS;
 GameState gameState;
 Button* button(Start);
 pair<int, int> RESISTOR;
@@ -60,7 +58,20 @@ void playing1(SDL_Event& event){
             gameState = GameOver;
             break; 
 		}
-		Button *
+		Button *endTurn = Button(EndTurn);
+		for(int i = 0; i < 20; i++){
+			for(int j = 0; j < 20; j++){
+				if(Button[i][j].getTriggered()){
+					if(RESISTOR.first == -1, RESISTOR.second == -1){
+						RESISTOR.first = i;
+						RESISTOR.second = j;
+					}
+					else{
+						if(board[RESISTOR.first][RESISTOR.second].valid_move(int posX,int posY)
+					}
+				}
+			}
+		}
 	}
 }
 
