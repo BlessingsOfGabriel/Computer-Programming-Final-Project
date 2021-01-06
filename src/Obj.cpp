@@ -3,9 +3,17 @@
 #include<string>
 using namespace std;
 
-Obj::Obj(){};
+Obj::Obj(): _width(0), _height(0), _texture(NULL), _xPos(0), _yPos(0) {}
 
-Obj::~Obj(){};
+Obj::~Obj() {
+	free();
+}
+
+void Obj::loadTexture(std::string name) {
+    free();
+    _texture = loadedTexture.getTexture(name);
+    SDL_QueryTexture(_texture, NULL, NULL, &_width, &_height);
+}
 
 int Obj::getHeight(){
     return _height;
@@ -20,4 +28,12 @@ void Obj::resize(int newHeight,int newWidth){
     _width = newWidth;
 }
 
-void free(){};
+void Obj::free() {
+	if (_texture != NULL) {
+		_texture = NULL;
+		_width = 0;
+		_height = 0;
+	}
+}
+
+void 
