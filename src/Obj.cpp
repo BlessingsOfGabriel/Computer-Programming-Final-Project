@@ -36,4 +36,6 @@ void Obj::free() {
 	}
 }
 
-void 
+void Obj::render(int posX,int posY){
+
+}
