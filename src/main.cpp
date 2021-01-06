@@ -1,7 +1,15 @@
 #include "global.h"
-#include "main.h"
 #include "Obj.h"
 #include "LoadMedia.h"
+#include "Archer.h"
+#include "Board.h"
+#include "Button.h"
+#include "GoldTower.h"
+#include "Knight.h"
+#include "Soldier.h"
+#include "Status.h"
+#include "Tower.h"
+#include "Unit.h"
 
 SDL_Window* gWindow = NULL;
 SDL_Renderer* gRenderer = NULL;
