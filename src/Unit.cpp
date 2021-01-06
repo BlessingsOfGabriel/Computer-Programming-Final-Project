@@ -8,9 +8,9 @@ Unit::Unit(int faction){
     _faction = faction;
 }
 
-Unit::~Unit(){};
+Unit::~Unit(){}
 
-void Unit::heal(){};
+void Unit::heal(){}
 
 bool Unit::valid_move(int posX,int posY){
     return false;

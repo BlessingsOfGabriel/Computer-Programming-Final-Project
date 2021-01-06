@@ -42,35 +42,35 @@ void Status::minus_gold(int x){
 
 bool Status::valid_buy(UnitType type){
     switch(type){
-        case(Soldier):{
+        case Soldier:{
             if(_goldAmount-2<0)
                 return false;
             else
                 return true;
             break;
         }
-        case(Archer):{
+        case Archer:{
             if(_goldAmount-2<0)
                 return false;
             else
                 return true;
             break;
         }
-        case(Knight):{
+        case Knight:{
             if(_goldAmount-4<0)
                 return false;
             else
                 return true;
             break;
         }
-        case(Tower):{
+        case Tower:{
             if(_goldAmount-3<0)
                 return false;
             else
                 return true;
             break;
         }
-        case(GoldTower):{
+        case GoldTower:{
             if(_goldAmount-5<0)
                 return false;
             else

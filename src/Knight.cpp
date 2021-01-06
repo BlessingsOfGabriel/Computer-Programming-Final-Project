@@ -6,7 +6,7 @@
 
 using namespace std;
 
-Knight::Knight(int fraction):Unit(fraction){
+Knight::Knight(int faction):Unit(faction){
     _health = 4;
     _damage = 2;
     _move = 2;

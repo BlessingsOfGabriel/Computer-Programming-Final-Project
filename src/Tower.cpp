@@ -6,7 +6,7 @@
 
 using namespace std;
 
-Tower::Tower{int fraction}:Unit(fraction){
+Tower::Tower{int faction}:Unit(faction){
     _health = 3;
     _damage = 1;
     _name = "Tower";

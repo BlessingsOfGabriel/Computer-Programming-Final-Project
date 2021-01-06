@@ -4,7 +4,9 @@
 #include<cmath>
 #include<string>
 
-Archer::Archer(int fraction):Unit(fraction){
+using namespace std;
+
+Archer::Archer(int faction):Unit(faction){
     _health = 2;
     _damage = 2;
     _move = 1;
@@ -21,7 +23,7 @@ bool Archer::valid_move(int posX,int posY){
 }
 
 bool Archer::valid_attack(int posX,int posY){
-    if(abs(posX-_xpos)==0 && abs(posY-_yPos)<=3 )
+    if(abs(posX-_xpos)==0 && abs(posY-_ypos)<=3 )
         return true;
     else if(abs(posX-_xpos)<=3 && abs(posY-_ypos)==0)
         return true;
