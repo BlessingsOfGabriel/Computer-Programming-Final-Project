@@ -43,3 +43,5 @@ void Button::set_triggered(bool state) {
 bool Button::get_triggered() {
     return triggered;
 }
+
+

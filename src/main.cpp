@@ -134,12 +134,17 @@ void playing1(SDL_Event& event){
             break; 
 		}
 		Button *endTurn = Button(EndTurn);
+		
 		for(int i = 0; i < 20; i++){
 			for(int j = 0; j < 20; j++){
 				if(Button[i][j].getTriggered()){
 					if(RESISTOR.first == -1, RESISTOR.second == -1){
 						RESISTOR.first = i;
 						RESISTOR.second = j;
+						if(Board[i][j].getFaction == -1){
+							gameState = store;
+							break;
+						}
 					}
 					else{
 						if(board[RESISTOR.first][RESISTOR.second].valid_move()
