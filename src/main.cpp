@@ -20,15 +20,23 @@ int LEVEL_HEIGHT = 2000;
 GameState gameState;
 Button* startButton;
 Button* restartButton;
-Button* 
+Button* tiles[20][20];
+Obj background, StartMenu, GameOver1, GameOver2;
 pair<int, int> RESISTOR;
 pair<double, double> boardToAct(pair<int, int>);
 
 int main(int argc, char* argv[]){
-	initialize();
-	loadMedia();
+	try {
+        initialize();
+        loadMedia();
+    }
+    catch (const char* message) {
+        printf("Error: %s\n", message);
+    }
+
 	SDL_Event event;
 	gameState = Menu;
+
 	while (gameState != Quit) {
         SDL_GetWindowSize(gWindow, &SCREEN_WIDTH, &SCREEN_HEIGHT);
         switch (gameState) {
@@ -79,11 +87,42 @@ void loadMedia(){
 }
 
 void menu(SDL_Event& event){
-			
+	 while( SDL_PollEvent( &e ) != 0 ) {
+        if (startButton->get_triggered() == true) {
+            gameState = Loading;
+            startButton->set_triggered(false);
+            break;
+        }
+        else if (e.type == SDL_QUIT) { gameState = Quit; break; }
+        startButton->handleEvent(&e);
+    }
+    SDL_SetRenderDrawColor( gRenderer, 182, 196, 182, 0 );
+    SDL_RenderClear( gRenderer );
+
+    background.resize(LEVEL_WIDTH, LEVEL_HEIGHT);
+    background.render(0, 0);
+    StartMenu.render(0, 0);
+    StartMenu.resize(1200, 800);
+    startButton->update();
+    startButton->resize(300, 50);
+
+    SDL_RenderPresent( gRenderer );
 }
 
 void loading(SDL_Event& event){
+	while( SDL_PollEvent( &e ) != 0 ) {
+        if (e.key.keysym.sym == SDLK_SPACE) {
+            gameState = playing1;
+            break;
+        }
+        else if (e.type == SDL_QUIT) { gameState = Quit; break; }
+    }
+    SDL_SetRenderDrawColor( gRenderer, 182, 196, 182, 0 );
+    SDL_RenderClear( gRenderer );
 
+    loadingmenu.render(0, 0);
+    loadingmenu.resize(SCREEN_WIDTH, SCREEN_HEIGHT);
+    SDL_RenderPresent( gRenderer );
 }
 
 void playing1(SDL_Event& event){
