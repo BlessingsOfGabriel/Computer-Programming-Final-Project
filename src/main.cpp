@@ -18,7 +18,9 @@ int SCREEN_HEIGHT = 800;
 int LEVEL_WIDTH = 2000;
 int LEVEL_HEIGHT = 2000;
 GameState gameState;
-Button* button(Start);
+Button* startButton;
+Button* restartButton;
+Button* 
 pair<int, int> RESISTOR;
 pair<double, double> boardToAct(pair<int, int>);
 
@@ -43,11 +45,37 @@ int main(int argc, char* argv[]){
 }
 
 void initialize(){
-	
+    if (SDL_Init(SDL_INIT_VIDEO | SDL_INIT_AUDIO) < 0) 
+		throw SDL_GetError();
+    if (!SDL_SetHint( SDL_HINT_RENDER_SCALE_QUALITY, "1" )) 
+		printf( "Warning: Linear texture filtering not enabled!" );
+    gWindow = SDL_CreateWindow( "ConquEEr", SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, SCREEN_WIDTH, SCREEN_HEIGHT, SDL_WINDOW_RESIZABLE );
+    if (gWindow == NULL) 
+		throw SDL_GetError();
+    gRenderer = SDL_CreateRenderer( gWindow, -1, SDL_RENDERER_ACCELERATED | SDL_RENDERER_PRESENTVSYNC );
+    if (gRenderer == NULL) 
+		throw SDL_GetError();
+    SDL_SetRenderDrawColor( gRenderer, 182, 196, 182, 100 );
+    int imgFlags = IMG_INIT_PNG;
+    if (!(IMG_Init( imgFlags ) & imgFlags)) 
+		throw IMG_GetError();
+    if( Mix_OpenAudio( 44100, MIX_DEFAULT_FORMAT, 2, 2048 ) < 0 ) 
+		throw Mix_GetError();
 }
 
 void loadMedia(){
-	
+    loadedTexture.loadAllTexture();
+    loadedSound.loadAllSound();
+
+    startButton = new Button(Start);
+	buyButton = new Button(Buy);
+    restartButton = new Button(Restart);
+
+    StartMenu.loadTexture("StartMenu");
+    loadingmenu.loadTexture("loadingmenu");
+    GameOver1.loadTexture("GameOver1");
+    GameOver2.loadTexture("GameOver2");
+    loadedSound.playSound(4, "BGM", -1);
 }
 
 void menu(SDL_Event& event){
@@ -75,7 +103,7 @@ void playing1(SDL_Event& event){
 						RESISTOR.second = j;
 					}
 					else{
-						if(board[RESISTOR.first][RESISTOR.second].valid_move(int posX,int posY)
+						if(board[RESISTOR.first][RESISTOR.second].valid_move()
 					}
 				}
 			}
@@ -96,5 +124,22 @@ void store(SDL_Event& event){
 }
 
 void close() {
+background.free();
+    StartMenu.free();
+    loadingmenu.free();
 
+
+    loadedTexture.free();
+
+    loadedSound.free();
+    startButton = NULL;
+    continueButton = NULL;
+    restartButton = NULL;
+	SDL_DestroyRenderer( gRenderer );
+	SDL_DestroyWindow( gWindow );
+	gWindow = NULL;
+	gRenderer = NULL;
+
+	IMG_Quit();
+	SDL_Quit();
 }
