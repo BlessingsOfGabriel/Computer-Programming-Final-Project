@@ -21,3 +21,25 @@ void Board::add_unit(int posX,int posY,Unit new_unit){
 void Board::delete_unit(int posX,int posY){
     _current[posX][posY] = nullptr;
 }
+
+void Board::move(int posX,int posY){
+    if(valid_move(posX,posY)){
+        _xpos = posX;
+        _ypos = posY;
+    }
+}
+
+void Board::attack(Unit &target){
+    if(valid_attack(target._xpos,target._ypos)){
+        target.attacked(_damage);
+    }
+}
+
+void Board::attacked(int damage)
+{
+    _health -= damage;
+    if(_health>0)
+        deathchecker = 1;
+    else
+        deathchecker = 0;
+}
