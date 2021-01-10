@@ -11,6 +11,8 @@ public:
 	virtual bool valid_attack(int posX, int posY);
 	virtual bool valid_pos(int posX,int posY);
 	void attack(Unit& target);
+	void update_move(int posX, int posY);
+	void update_attacked(int damage);
 
 protected:
 	int _max_health;
