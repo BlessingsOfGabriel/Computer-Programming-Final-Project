@@ -37,5 +37,7 @@ void Obj::free() {
 }
 
 void Obj::render(int posX,int posY){
-
+	SDL_Rect srcRect(_xPos, _yPos, _width, _height);
+	SDL_Rect DestRect(posX, posY, _width, _height);
+	SDL_RenderCopy(gRenderer, _texture, &srcRect, &DestRect);
 }
