@@ -93,7 +93,7 @@ void status::updateStatusString()
     }
 }
 
-void surface::free()
+void status::free()
 {
 	//Free texture if it exists
 	if( surfaceTexture != NULL )
