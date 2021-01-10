@@ -6,6 +6,7 @@ using namespace std;
 
 Unit::Unit(int faction){
     _faction = faction;
+    deathchecker = 1;
 }
 
 Unit::~Unit(){}
@@ -29,7 +30,7 @@ bool Unit::valid_attack(int posX,int posY){
 
 void Unit::attack(Unit &target){
     if(valid_attack(target._xpos,target._ypos)){
-        target._health -= _damage;
+        target.attacked(_damage);
     }
 }
 
@@ -37,4 +38,12 @@ bool Unit::valid_pos(int posX,int posY){
     return true;
 }
 
+void Unit::attacked(int damage)
+{
+    _health -= damage;
+    if(_health>0)
+        deathchecker = 1;
+    else
+        deathchecker = 0;
+}
 
