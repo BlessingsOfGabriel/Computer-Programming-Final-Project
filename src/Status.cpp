@@ -15,7 +15,7 @@ Status::Status(int x){
     _baseHealth = 10;
 }
 
-Status::~Status(){};
+Status::~Status(){}
 
 void Status::turn_plus(){
     _turn++;

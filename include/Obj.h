@@ -7,11 +7,10 @@ class Obj{
 		~Obj();
 		int getHeight();
 		int getWidth();
-		
+
 		void loadTexture(std::string);
 		virtual void resize(int newHeight, int newWidth);
 		void free();
-		void move(int posX, int posY)
 		void render(int posX, int posY);
 	protected:
 		int _height, _width;
