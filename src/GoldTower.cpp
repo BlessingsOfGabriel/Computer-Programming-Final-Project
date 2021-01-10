@@ -23,7 +23,7 @@ bool GoldTower::valid_attack(int posX,int posY){
 }
 
 bool GoldTower::valid_pos(int posX,int posY){
-    if(_fraction == 0){
+    if(_fraction == 1){
         if(posX>posY){
             _xpos = posX;
             _ypos = posY;
@@ -32,7 +32,7 @@ bool GoldTower::valid_pos(int posX,int posY){
         else
             return false;
     }
-    else if(_fraction == 1){
+    else if(_fraction == 0){
         if(posX<posY){
             _xpos = posX;
             _ypos = posY;

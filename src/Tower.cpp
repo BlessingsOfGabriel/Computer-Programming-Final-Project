@@ -22,7 +22,7 @@ bool Tower::valid_attack(int posX,int posY){
 }
 
 bool Tower::valid_pos(int posX,int posY){
-    if(_faction == 0){
+    if(_faction == 1){
         if(posX>=(posY+9)){
             _xpos = posX;
             _ypos = posY;
@@ -31,7 +31,7 @@ bool Tower::valid_pos(int posX,int posY){
         else
             return false;
     }
-    else if(_faction == 1){
+    else if(_faction == 0){
         if((posX+9)<=posY){
             _xpos = posX;
             _ypos = posY;

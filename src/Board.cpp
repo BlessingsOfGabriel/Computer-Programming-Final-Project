@@ -19,7 +19,7 @@ void Board::add_unit(int posX,int posY,Unit new_unit){
 }
 
 void Board::delete_unit(int posX,int posY){
-    _current[posX][posY] = nullptr;
+    _current[posX][posY]._faction = -1;
 }
 
 void Board::move(int posX,int posY){

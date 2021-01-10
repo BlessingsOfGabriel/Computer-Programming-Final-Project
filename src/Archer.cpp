@@ -38,7 +38,7 @@ bool Archer::valid_attack(int posX,int posY){
 }
 
 bool Archer::valid_pos(int posX,int posY){
-    if(_faction == 0){
+    if(_faction == 1){
         if(posX>posY){
             _xpos = posX;
             _ypos = posY;
@@ -47,7 +47,7 @@ bool Archer::valid_pos(int posX,int posY){
         else
             return false;
     }
-    else if(_faction == 1){
+    else if(_faction == 0){
         if(posX<posY){
             _xpos = posX;
             _ypos = posY;
