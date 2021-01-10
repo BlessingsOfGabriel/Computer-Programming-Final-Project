@@ -11,6 +11,7 @@ Status::Status(){
     _turn = 0;
     _goldPerTurn = 5;
     _goldAmount = 0;
+    _baseHealth = 10;
 }
 
 Status::~Status(){};
