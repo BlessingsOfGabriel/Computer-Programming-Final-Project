@@ -6,7 +6,7 @@
 
 class Status: public Obj{
 public:
-    Status();
+    Status(int);
     ~Status();
 	int calculate_gpt();
 	void turn_plus();
@@ -34,5 +34,6 @@ protected:
 	int _turn;
 	std::vector<Unit> _unitList;
 	int _baseHealth;
+	int _statusFaction;
 };
 #endif

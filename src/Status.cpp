@@ -7,7 +7,8 @@
 
 using namespace std;
 
-Status::Status(){
+Status::Status(int x){
+    _statusFaction = x;
     _turn = 0;
     _goldPerTurn = 5;
     _goldAmount = 0;
@@ -115,7 +116,7 @@ void status::updateStatusSurface()
     sWidth = statusSurface->w;
     sHeight = statusSurface->h;
     SDL_FreeSurface(statusSurface);
-    SDL_Rect renderQuad = (==) ?{0,0, 200,1600  }:{1800,0,200,1600};
+    SDL_Rect renderQuad = (_statusFaction == 0) ?{0,0, 200,1600}:{1800,0,200,1600};
     SDL_RenderCopy( surfaceRenderer, surfaceTexture, NULL, &renderQuad );
     SDL_RenderPresent(surfaceRenderer);
 }
