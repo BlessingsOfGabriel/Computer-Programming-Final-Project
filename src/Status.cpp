@@ -102,8 +102,7 @@ void status::free()
 	{
 		SDL_DestroyTexture( surfaceTexture );
 		surfaceTexture = NULL;
-		sWidth = 0;
-		sHeight = 0;
+
 	}
 }
 void status::updateStatusSurface()
@@ -112,9 +111,7 @@ void status::updateStatusSurface()
     free();
     statusRenderer = SDL_CreateRenderer( gWindow, -1, SDL_RENDERER_ACCELERATED | SDL_RENDERER_PRESENTVSYNC );
     statusSurface = TTF_RenderText_Solid( gFont, statusString.c_str(), White );
-    surfaceTexture = SDL_CreateTextureFromSurface(surfaceRenderer, statusSurface);
-    sWidth = statusSurface->w;
-    sHeight = statusSurface->h;
+    surfaceTexture = SDL_CreateTextureFromSurface(statusRenderer, statusSurface);
     SDL_FreeSurface(statusSurface);
     SDL_Rect renderQuad = (_statusFaction == 0) ?{0,0, 200,1600}:{1800,0,200,1600};
     SDL_RenderCopy( surfaceRenderer, surfaceTexture, NULL, &renderQuad );
