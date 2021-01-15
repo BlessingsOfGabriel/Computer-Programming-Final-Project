@@ -20,13 +20,14 @@ int LEVEL_HEIGHT = 2000;
 GameState gameState;
 Button* startButton;
 Button* restartButton;
+Button* endTurn;
 Button* tiles[20][20];
 Button* buy[5];
 Board gBoard;
 Status Status1, Status2;
-Obj StartMenu, Load, GameOver1, GameOver2;
-pair<int, int> RESISTOR;
-pair<double, double> boardToAct(pair<int, int>);
+Obj StartMenu, Load, Store, GameOver1, GameOver2;
+pair<int, int> REGISTER;
+pair<int, int> boardToAct(pair<int, int>);
 
 int main(int argc, char* argv[]){
 	try {
@@ -47,7 +48,8 @@ int main(int argc, char* argv[]){
             case Loading: loading(event); break;
             case Playing_1: playing_1(event); break;
 			case Playing_2: playing_2(event); break;
-			case Store: store(event); break;
+			case Store_1: store1(event); break;
+            case Store_2: store2(event); break;
             case GameOver: gameover(event); break;
             default: gameState = Quit; break;
         }
@@ -79,8 +81,13 @@ void loadMedia(){
     loadedSound.loadAllSound();
 
     startButton = new Button(Start);
-	buyButton = new Button(Buy);
+    endTurnButton = new Button(EndTurn);
     restartButton = new Button(Restart);
+    for(int i = 0; i < 5; i++)
+        buy[i] = new Button(Buy);
+    for(int i = 0; i < 20; i++)
+        for(int j = 0; j < 20; j++)
+            tiles[i][j] = new Button(Common);
 
     StartMenu.loadTexture("StartMenu");
     loadingmenu.loadTexture("loadingmenu");
@@ -135,33 +142,35 @@ void playing1(SDL_Event& event){
 		Button *endTurn = Button(EndTurn);
 		if(endTurn->get_triggered()){
 			endTurn->set_triggered(false);
-			gameState = playing2;
+			gameState = playing_2;
 			break;
 		}
 		
 		for(int i = 0; i < 20; i++){
 			for(int j = 0; j < 20; j++){
 				if(tiles[i][j] -> getTriggered()){
-					if(RESISTOR.first == -1, RESISTOR.second == -1){
-						RESISTOR.first = i;
-						RESISTOR.second = j;
+					if(REGISTER.first == -1, REGISTER.second == -1){
+                        if(gBoard.getUnit(i, j).getFaction() != 1){
+						    REGISTER.first = i;
+						    REGISTER.second = j;
+                        }
 						if(Board[i][j].getFaction == -1){
-							gameState = store;
+							gameState = store1;
 							break;
 						}
 						else
 							break;
 					}
 					else{
-						if(board[RESISTOR.first][RESISTOR.second].valid_move(i, j)){
-							pair<double, double> newPos = boardToAct(pair<int, int>(i, j));
-							gBoard.getUnit(RESISTOR.first, RESISTOR.second).render(newPos.first, newPos.second);
+						if(board[REGISTER.first][REGISTER.second].valid_move(i, j)){
+							pair<int, int> newPos = boardToAct(pair<int, int>(i, j));
+							gBoard.getUnit(REGISTER.first, REGISTER.second).render(newPos.first, newPos.second);
 							SDL_RenderPresent(gRenderer);
-							gBoard.move(RESISTOR.first, RESISTOR.second);
+							gBoard.move(REGISTER.first, REGISTER.second);
 							break;
 						}
-						else if(board[RESISTOR.first][RESISTOR.second].valid_attack(i, j)){
-							gBoard[RESISTOR.first][RESISTOR.second].attack(gBoard[i][j]);
+						else if(board[REGISTER.first][REGISTER.second].valid_attack(i, j)){
+							gBoard[REGISTER.first][REGISTER.second].attack(gBoard[i][j]);
 							break;
 						}
 					}
@@ -169,6 +178,16 @@ void playing1(SDL_Event& event){
 			}
 		}
 	}
+    SDL_SetRenderDrawColor( gRenderer, 182, 196, 182, 0 );
+    SDL_RenderClear( gRenderer );
+
+    for(int i = 0; i < 20; i++){
+        for(int j = 0; j < 20; j++){
+            tiles[i][j] -> resize(60, 60);
+            pair<int, int>actPos = boardToAct(pair<int, int>(i, j));
+            tiles[i][j] -> render(actPos.first, actPos.second);
+        }
+    }
 	gBoard.resize(1200, 1200);
 	gBoard.render(400, 0);
 	SDL_RenderPresent( gRenderer );
@@ -181,35 +200,37 @@ void playing2(SDL_Event& event){
             gameState = GameOver;
             break; 
 		}
-		Button *endTurn = Button(EndTurn);
 		if(endTurn->get_triggered()){
 			endTurn->set_triggered(false);
-			gameState = playing1;
+			gameState = playing_1;
 			break;
 		}
 		
 		for(int i = 0; i < 20; i++){
 			for(int j = 0; j < 20; j++){
-				if(Button[i][j].getTriggered()){
-					if(RESISTOR.first == -1, RESISTOR.second == -1){
-						RESISTOR.first = i;
-						RESISTOR.second = j;
+				if(tiles[i][j] -> getTriggered()){
+					if(REGISTER.first == -1, REGISTER.second == -1){
+                        if(gBoard.getUnit(i, j).getFaction() != 0){
+						    REGISTER.first = i;
+						    REGISTER.second = j;
+                        }
 						if(Board[i][j].getFaction == -1){
-							gameState = store1;
+							gameState = Store_2;
 							break;
 						}
 						else
 							break;
 					}
 					else{
-						if(board[RESISTOR.first][RESISTOR.second].valid_move(i, j)){
-							board[RESISTOR.first][RESISTOR.second].move(i, j);
-							pair<double, double> newPos = boardToAct(pair<int, int>(i, j));
-							board[RESISTOR.first][RESISTOR.second].render(newPos.first, newPos.second);
+						if(board[REGISTER.first][REGISTER.second].valid_move(i, j)){
+							pair<int, int> newPos = boardToAct(pair<int, int>(i, j));
+							gBoard.getUnit(REGISTER.first, REGISTER.second).render(newPos.first, newPos.second);
+							SDL_RenderPresent(gRenderer);
+							gBoard.move(REGISTER.first, REGISTER.second);
 							break;
 						}
-						else if(board[RESISTOR.first][RESISTOR.second].valid_attack(i, j)){
-							board[RESISTOR.first][RESISTOR.second].attack(board[i][j]);
+						else if(board[REGISTER.first][REGISTER.second].valid_attack(i, j)){
+							gBoard[REGISTER.first][REGISTER.second].attack(gBoard[i][j]);
 							break;
 						}
 					}
@@ -217,9 +238,20 @@ void playing2(SDL_Event& event){
 			}
 		}
 	}
-	SDL_RenderPresent(gRenderer);
-}
+	SDL_SetRenderDrawColor( gRenderer, 182, 196, 182, 0 );
+    SDL_RenderClear( gRenderer );
 
+    for(int i = 0; i < 20; i++){
+        for(int j = 0; j < 20; j++){
+            tiles[i][j] -> resize(60, 60);
+            pair<int, int>actPos = boardToAct(pair<int, int>(i, j));
+            tiles[i][j] -> render(actPos.first, actPos.second);
+        }
+    }
+	gBoard.resize(1200, 1200);
+	gBoard.render(400, 0);
+	SDL_RenderPresent( gRenderer );
+}
 
 void gameover(SDL_Event& event){
 	while( SDL_PollEvent( &e ) != 0 ) {
@@ -242,7 +274,7 @@ void gameover(SDL_Event& event){
     SDL_SetRenderDrawColor( gRenderer, 182, 196, 182, 0 );
     SDL_RenderClear( gRenderer );
 
-    if() {
+    if(status2._baseHealth == 0) {
         GameOver1.render(0,0);
         GameOver1.resize(SCREEN_WIDTH, SCREEN_HEIGHT);
     }
@@ -251,81 +283,87 @@ void gameover(SDL_Event& event){
         GameOver2.resize(SCREEN_WIDTH, SCREEN_HEIGHT);
     }
 
-    restartButton->update();
-    restartButton->resize(350, 70);
-
+    restartButton -> resize(350, 70);
+    restartButton -> render(825, 1000);
     SDL_RenderPresent( gRenderer );
 }
 
 void store1(SDL_Event& event){
 	while( SDL_PollEvent(&event) != 0 ){
-		if(buyButton[0].getTriggered()){
-			Board.add_Unit(Soldier(0));
+		if(buy[0] -> getTriggered()){
+			Board.add_Unit(REGISTER.first, REGISTER.second, new Soldier(0));
 			gameState = playing1;
-			buyButton[0].set_triggered(false);
+			buy[0] -> set_triggered(false);
 			break;
 		}
-        if(buyButton[1].getTriggered()){
-			Board.add_Unit(Archer(0));
+        if(buy[1] -> getTriggered()){
+			Board.add_Unit(REGISTER.first, REGISTER.second, new Archer(0));
 			gameState = playing1;
-			buyButton[0].set_triggered(false);
+			buy[1] -> set_triggered(false);
 			break;
 		}
-        if(buyButton[2].getTriggered()){
-			Board.add_Unit(Knight(0));
+        if(buy[2] -> getTriggered()){
+			Board.add_Unit(REGISTER.first, REGISTER.second, new Knight(0));
 			gameState = playing1;
-			buyButton[0].set_triggered(false);
+			buy[2] -> set_triggered(false);
 			break;
 		}
-        if(buyButton[3].getTriggered()){
-			Board.add_Unit(Tower(0));
+        if(buy[3] -> getTriggered()){
+			Board.add_Unit(REGISTER.first, REGISTER.second, new Tower(0));
 			gameState = playing1;
-			buyButton[0].set_triggered(false);
+			buy[3] -> set_triggered(false);
 			break;
 		}
-        if(buyButton[4].getTriggered()){
-			Board.add_Unit(Goldtower(0));
+        if(buy[4] -> getTriggered()){
+			Board.add_Unit(REGISTER.first, REGISTER.second, new GoldTower(0));
 			gameState = playing1;
-			buyButton[0].set_triggered(false);
+			buy[4] -> set_triggered(false);
 			break;
 		}
 	}
+    gStore.resize(2000, 1200);
+    gStore.render(0, 0)
+    
     SDL_RenderPresent(gRenderer);
 }
 
 void store2(SDL_Event& event){
 	while( SDL_PollEvent(&event) != 0 ){
-		if(buyButton[0].getTriggered()){
-			Board.add_Unit(Soldier(1));
+		if(buy[0] -> getTriggered()){
+			Board.add_Unit(REGISTER.first, REGISTER.second, new Soldier(1));
 			gameState = playing1;
-			buyButton[0].set_triggered(false);
+			buy[0] -> set_triggered(false);
 			break;
 		}
-        if(buyButton[1].getTriggered()){
-			Board.add_Unit(Archer(1));
+        if(buy[1] -> getTriggered()){
+			Board.add_Unit(REGISTER.first, REGISTER.second, new Archer(1));
 			gameState = playing1;
-			buyButton[0].set_triggered(false);
+			buy[1] -> set_triggered(false);
 			break;
 		}
-        if(buyButton[2].getTriggered()){
-			Board.add_Unit(Knight(1));
+        if(buy[2] -> getTriggered()){
+			Board.add_Unit(REGISTER.first, REGISTER.second, new Knight(1));
 			gameState = playing1;
-			buyButton[0].set_triggered(false);
+			buy[2] -> set_triggered(false);
 			break;
 		}
-        if(buyButton[3].getTriggered()){
-			Board.add_Unit(Tower(1));
+        if(buy[3] -> getTriggered()){
+			Board.add_Unit(REGISTER.first, REGISTER.second, new Tower(1));
 			gameState = playing1;
-			buyButton[0].set_triggered(false);
+			buy[3] -> set_triggered(false);
 			break;
 		}
-        if(buyButton[4].getTriggered()){
-			Board.add_Unit(Goldtower(1));
+        if(buy[4] -> getTriggered()){
+			Board.add_Unit(REGISTER.first, REGISTER.second, new GoldTower(1));
 			gameState = playing1;
-			buyButton[0].set_triggered(false);
+			buy[4] -> set_triggered(false);
 			break;
 		}
 	}
+
+    gStore.resize(2000, 1200);
+    gStore.render(0, 0)
+    
     SDL_RenderPresent(gRenderer);
 }
 
