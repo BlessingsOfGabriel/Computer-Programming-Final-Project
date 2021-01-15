@@ -22,23 +22,26 @@ void Board::delete_unit(int posX,int posY){
     _current[posX][posY]._faction = -1;
 }
 
-void Board::move(int posX,int posY){
-    if(valid_move(posX,posY)){
-        _xpos = posX;
-        _ypos = posY;
+void Board::move(int x,int y,int posX,int posY){
+    if(_current[x][y].valid_move(posX,posY)){
+        _current[x][y]._xpos = posX;
+        _current[x][y]._ypos = posY;
     }
 }
 
-void Board::attack(Unit &target){
-    if(valid_attack(target._xpos,target._ypos)){
-        target._health -= damage;
-        if(target._health>0)
-            target.deathchecker = 1;
+void Board::attack(int x,int y,int posX,int posY){
+    if(_current[x][y].valid_attack(_current[x][y]._xpos,_current[x][y]._ypos)){
+        _current[x][y]._health -= damage;
+        if(_current[x][y]._health>0)
+            _current[x][y].deathchecker = 1;
         else{
-            target.deathchecker = 0;
-            delete_unit(target._xpos,target._ypos);
+            _current[x][y].deathchecker = 0;
+            _current[x][y].delete_unit(_current[x][y]._xpos,_current[x][y]._ypos);
         }
 
     }
 }
 
+Unit& Board::getUnit(int x,int y){
+    return _current[x][y];
+}

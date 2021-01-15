@@ -1,7 +1,7 @@
 #include "Obj.h"
 #include "Unit.h"
-#include<cmath>
-
+#include <cmath>
+#include <string>
 using namespace std;
 
 Unit::Unit(int faction){
@@ -27,6 +27,6 @@ bool Unit::valid_pos(int posX,int posY){
 
 void updatePersonality()
 {
-    personality = _name + " (" + to_string(posX) + "," + to_string(posY) + ")   ATK: " + to_string(_damage) + "  HP: " + to_string(_health);
+    personality = _name + " (" + to_string(_xpos) + "," + to_string(_ypos) + ")   ATK: " + to_string(_damage) + "  HP: " + to_string(_health);
 }
 
