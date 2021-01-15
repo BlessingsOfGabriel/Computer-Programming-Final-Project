@@ -21,6 +21,9 @@ GameState gameState;
 Button* startButton;
 Button* restartButton;
 Button* tiles[20][20];
+Button* buy[5];
+Board gBoard;
+Status Status1, Status2;
 Obj StartMenu, Load, GameOver1, GameOver2;
 pair<int, int> RESISTOR;
 pair<double, double> boardToAct(pair<int, int>);
@@ -99,8 +102,6 @@ void menu(SDL_Event& event){
     SDL_SetRenderDrawColor( gRenderer, 182, 196, 182, 0 );
     SDL_RenderClear( gRenderer );
 
-    background.resize(LEVEL_WIDTH, LEVEL_HEIGHT);
-    background.render(0, 0);
     StartMenu.render(0, 0);
     StartMenu.resize(1200, 800);
     startButton->resize(300, 50);
@@ -140,7 +141,7 @@ void playing1(SDL_Event& event){
 		
 		for(int i = 0; i < 20; i++){
 			for(int j = 0; j < 20; j++){
-				if(Button[i][j].getTriggered()){
+				if(tiles[i][j] -> getTriggered()){
 					if(RESISTOR.first == -1, RESISTOR.second == -1){
 						RESISTOR.first = i;
 						RESISTOR.second = j;
@@ -153,13 +154,14 @@ void playing1(SDL_Event& event){
 					}
 					else{
 						if(board[RESISTOR.first][RESISTOR.second].valid_move(i, j)){
-							board[RESISTOR.first][RESISTOR.second].move(i, j);
 							pair<double, double> newPos = boardToAct(pair<int, int>(i, j));
-							board[RESISTOR.first][RESISTOR.second].render(newPos.first, newPos.second);
+							gBoard.getUnit(RESISTOR.first, RESISTOR.second).render(newPos.first, newPos.second);
+							SDL_RenderPresent(gRenderer);
+							gBoard.move(RESISTOR.first, RESISTOR.second);
 							break;
 						}
 						else if(board[RESISTOR.first][RESISTOR.second].valid_attack(i, j)){
-							board[RESISTOR.first][RESISTOR.second].attack(board[i][j]);
+							gBoard[RESISTOR.first][RESISTOR.second].attack(gBoard[i][j]);
 							break;
 						}
 					}
@@ -167,6 +169,8 @@ void playing1(SDL_Event& event){
 			}
 		}
 	}
+	gBoard.resize(1200, 1200);
+	gBoard.render(400, 0);
 	SDL_RenderPresent( gRenderer );
 }
 
