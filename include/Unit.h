@@ -15,6 +15,7 @@ public:
 	int getFaction();
 
     friend class Board;
+	friend class Status;
 
 protected:
 	int _max_health;

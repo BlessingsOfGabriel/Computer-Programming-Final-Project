@@ -34,6 +34,6 @@ void Unit::updatePersonality()
     personality = _name + " (" + to_string(_xpos) + "," + to_string(_ypos) + ")   ATK: " + to_string(_damage) + "  HP: " + to_string(_health);
 }
 
-int getFaction(){
+int Unit::getFaction(){
     return _faction;
 }

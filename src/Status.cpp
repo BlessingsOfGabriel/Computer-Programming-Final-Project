@@ -1,5 +1,6 @@
 #include "Status.h"
 #include "Obj.h"
+#include "Unit.h"
 #include "global.h"
 #include "Board.h"
 #include <cmath>
@@ -35,7 +36,7 @@ void Status::add_Unit(Unit unit){
 void Status::delete_Unit(int x,int y){
     vector<Unit>::iterator it;
     for(it=_unitList.begin(); it!=_unitList.end() ; it++){
-        if(*it._xpos==x && *it._ypos==y)
+        if(it -> _xpos==x && it -> _ypos==y)
             _unitList.erase(it);
     }
     update();
@@ -47,7 +48,7 @@ void Status::minus_gold(int x){
 }
 
 bool Status::valid_buy(int x){
-    switch(type){
+    switch(x){
         case 0:{
             if(_goldAmount-2<0)
                 return false;
@@ -89,24 +90,24 @@ bool Status::valid_buy(int x){
     }
 }
 
-void status::updateStatusString()
+void Status::updateStatusString()
 {
-    statusString = "";
+    _statusString = "";
     vector<Unit>::iterator it;
     for(it=_unitList.begin(); it!=_unitList.end() ; it++){
-        statusString += *it.personality;
-        statusString += "\n";
+        _statusString += it -> personality;
+        _statusString += "\n";
     }
-    statusString += "GoldAmounts: ";
-    statusString += to_string(_goldAmount);
-    statusString += "\n";
+    _statusString += "GoldAmounts: ";
+    _statusString += to_string(_goldAmount);
+    _statusString += "\n";
     if(_statusFaction == 1)
-        statusString += to_string(_base1);
+        _statusString += to_string(gBoard.get_base1());
     else if(_statusFaction == 0)
-        statusFaction += to_string(_base0);
+        _statusString += to_string(gBoard.get_base0());
 }
 
-void status::free()
+void Status::free()
 {
 	//Free texture if it exists
 	if( surfaceTexture != NULL )
@@ -116,20 +117,28 @@ void status::free()
 
 	}
 }
-void status::updateStatusSurface()
+void Status::updateStatusSurface()
 {
     SDL_Color White = {255,255,255};
     free();
-    statusRenderer = SDL_CreateRenderer( gWindow, -1, SDL_RENDERER_ACCELERATED | SDL_RENDERER_PRESENTVSYNC );
-    statusSurface = TTF_RenderText_Solid( gFont, statusString.c_str(), White );
-    surfaceTexture = SDL_CreateTextureFromSurface(statusRenderer, statusSurface);
+    SDL_Renderer *statusRenderer = SDL_CreateRenderer( gWindow, -1, SDL_RENDERER_ACCELERATED | SDL_RENDERER_PRESENTVSYNC );
+    SDL_Surface *statusSurface = TTF_RenderText_Solid( gFont, _statusString.c_str(), White );
+    SDL_Texture *surfaceTexture = SDL_CreateTextureFromSurface(statusRenderer, statusSurface);
     SDL_FreeSurface(statusSurface);
-    SDL_Rect renderQuad = (_statusFaction == 0) ?{0,0, 200,1600}:{1800,0,200,1600};
+    SDL_Rect renderQuad;
+    if(_statusFaction == 0)
+    {
+        renderQuad = {0,0,200,1600};
+    }
+    else
+    {
+        renderQuad = {1800,0,200,1600};
+    }
     SDL_RenderCopy( surfaceRenderer, surfaceTexture, NULL, &renderQuad );
     SDL_RenderPresent(surfaceRenderer);
 }
 
-void status::update(){
+void Status::update(){
     updateStatusString();
     updateStatusSurface();
 }

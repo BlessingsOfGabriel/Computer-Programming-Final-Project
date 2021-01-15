@@ -22,3 +22,5 @@ protected:
     int _base1;
 };
 #endif
+
+extern Board gBoard;

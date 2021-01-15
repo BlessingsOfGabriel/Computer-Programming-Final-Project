@@ -45,8 +45,8 @@ void Obj::render(int posX,int posY){
 	srcRect.h = _height;
 	SDL_Rect destRect;
 	destRect.x = posX;
-        destRect.y = posY;
-        destRect.w = _width;
-        destRect.h = _height;
+    destRect.y = posY;
+    destRect.w = _width;
+    destRect.h = _height;
 	SDL_RenderCopy(gRenderer, _texture, &srcRect, &destRect);
 }

@@ -6,7 +6,7 @@ OBJDIR = ./build
 EXEDIR = ./bin
 
 
-LDFLAGS = -lmingw32 -lSDL2_image -lSDL2_mixer -lSDL2main -lSDL2
+LDFLAGS = -lmingw32 -lSDL2_image -lSDL2_mixer -lSDL2main -lSDL2_ttf -lSDL2
 
 
 all: directories $(EXEDIR)/ConquEEror

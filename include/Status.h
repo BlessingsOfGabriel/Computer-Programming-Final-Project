@@ -36,5 +36,6 @@ protected:
 	int _turn;
 	std::vector<Unit> _unitList;
 	int _statusFaction;
+	std::string _statusString;
 };
 #endif
