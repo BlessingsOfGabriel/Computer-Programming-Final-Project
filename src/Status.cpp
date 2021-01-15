@@ -90,7 +90,7 @@ void status::updateStatusString()
     statusString = "";
     vector<Unit>::iterator it;
     for(it=_unitList.begin(); it!=_unitList.end() ; it++){
-        statusString += it.personality;
+        statusString += *it.personality;
         statusString += "\n";
     }
 }
