@@ -1,8 +1,8 @@
 #ifndef GLOBAL_H
 #define GLOBAL_H
 #include <SDL2/SDL.h>
-#include <SDL2_image/SDL_image.h>
-#include <SDL2_mixer/SDL_mixer.h>
+#include <SDL2/SDL_image.h>
+#include <SDL2/SDL_mixer.h>
 #include <string>
 #include <stdlib.h>
 #include <stdio.h>
