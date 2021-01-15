@@ -9,7 +9,6 @@ public:
 	~Board();
 	void add_unit(int posX, int posY, Unit new_unit);
 	void delete_unit(int posX, int posY);
-    void attacked(int damage);
     void move(int posX,int posY);
     void attack(Unit& target);
 

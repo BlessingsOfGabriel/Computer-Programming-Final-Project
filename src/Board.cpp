@@ -31,15 +31,14 @@ void Board::move(int posX,int posY){
 
 void Board::attack(Unit &target){
     if(valid_attack(target._xpos,target._ypos)){
-        target.attacked(_damage);
+        target._health -= damage;
+        if(target._health>0)
+            target.deathchecker = 1;
+        else{
+            target.deathchecker = 0;
+            delete_unit(target._xpos,target._ypos);
+        }
+
     }
 }
 
-void Board::attacked(int damage)
-{
-    _health -= damage;
-    if(_health>0)
-        deathchecker = 1;
-    else
-        deathchecker = 0;
-}
