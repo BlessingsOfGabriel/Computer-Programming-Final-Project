@@ -11,6 +11,7 @@ public:
 	virtual bool valid_pos(int posX,int posY);
 	bool deathchecker;
 	void updatePersonality;
+	int getFaction();
 
     friend class Board;
 

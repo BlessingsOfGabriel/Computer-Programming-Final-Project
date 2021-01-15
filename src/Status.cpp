@@ -93,6 +93,8 @@ void status::updateStatusString()
         statusString += *it.personality;
         statusString += "\n";
     }
+    statusString += "GoldAmounts: ";
+    statusString += to_string(_goldAmount);
 }
 
 void status::free()

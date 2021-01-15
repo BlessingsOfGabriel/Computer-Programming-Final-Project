@@ -15,7 +15,8 @@ Board::~Board(){
 }
 
 void Board::add_unit(int posX,int posY,Unit new_unit){
-    _current[posX][posY] = new_unit;
+    if(new_unit.valid_pos)
+        _current[posX][posY] = new_unit;
 }
 
 void Board::delete_unit(int posX,int posY){
