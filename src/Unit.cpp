@@ -4,6 +4,10 @@
 #include <string>
 using namespace std;
 
+Unit::Unit(){
+	_faction = -1;
+	deathchecker = 0;
+}
 Unit::Unit(int faction){
     _faction = faction;
     deathchecker = 1;

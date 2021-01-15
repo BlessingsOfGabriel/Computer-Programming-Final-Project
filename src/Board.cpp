@@ -11,7 +11,10 @@ Board::Board(){
 }
 
 Board::~Board(){
-	delete[][]_current;
+	for(int i = 0; i < 20; i++){
+		delete[] _current[i];
+	}
+	delete[] _current;
 }
 
 void Board::add_unit(int posX,int posY,Unit new_unit){
@@ -32,7 +35,7 @@ void Board::move(int x,int y,int posX,int posY){
 
 void Board::attack(int x,int y,int posX,int posY){
     if(_current[x][y].valid_attack(_current[posX][posY]._xpos,_current[posX][posY]._ypos)){
-        _current[posX][posY]._health -= damage;
+        _current[posX][posY]._health -= _current[x][y]._damage;
         if(_current[posX][posY]._health>0)
             _current[posX][posY].deathchecker = 1;
         else{

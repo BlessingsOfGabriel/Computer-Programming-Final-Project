@@ -3,7 +3,8 @@
 #include "Obj.h"
 class Unit: public Obj{
 public:
-	Unit(int faction)
+	Unit();
+	Unit(int faction);
 	~Unit();
 	void heal();
 	virtual bool valid_move(int posX, int posY);

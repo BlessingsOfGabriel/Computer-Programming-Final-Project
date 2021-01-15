@@ -48,4 +48,6 @@ bool Soldier::valid_pos(int posX,int posY){
         else
             return false;
     }
+    else
+        return false;
 }

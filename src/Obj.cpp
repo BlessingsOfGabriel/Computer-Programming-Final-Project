@@ -1,4 +1,5 @@
 #include "Obj.h"
+#include "LoadMedia.h"
 #include<iostream>
 #include<string>
 using namespace std;
@@ -37,7 +38,15 @@ void Obj::free() {
 }
 
 void Obj::render(int posX,int posY){
-	SDL_Rect srcRect(_xPos, _yPos, _width, _height);
-	SDL_Rect DestRect(posX, posY, _width, _height);
-	SDL_RenderCopy(gRenderer, _texture, &srcRect, &DestRect);
+	SDL_Rect srcRect;
+	srcRect.x = _xPos;
+	srcRect.y = _yPos;
+	srcRect.w = _width;
+	srcRect.h = _height;
+	SDL_Rect destRect;
+	destRect.x = posX;
+        destRect.y = posY;
+        destRect.w = _width;
+        destRect.h = _height;
+	SDL_RenderCopy(gRenderer, _texture, &srcRect, &destRect);
 }

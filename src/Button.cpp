@@ -1,6 +1,28 @@
 #include "Button.h"
 #include "global.h"
 
+std::string typeToString(ButtonType _type){
+	switch(_type){
+		case Start:
+			return "Start";
+			break;
+		case Restart:
+			return "Restart";
+			break;
+		case Buy:
+			return "Buy";
+			break;
+		case EndTurn:
+			return "EndTurn";
+			break;
+		case Common:
+			return "Common";
+			break;
+		default:
+			return "Unknown";
+			break;
+	}
+}
 Button::Button(ButtonType _type): Obj(), triggered(false) {
     //Initialize
     _buttonType = _type;
@@ -12,10 +34,10 @@ Button::~Button() {
     triggered = false;
 }
 
-void Button::setPos(int x, int y) {
+/*void Button::setPos(int x, int y) {
     _posX = x;
     _posY = y;
-}
+}*/
 
 void Button::handleEvent(SDL_Event *e) {
 	if( e->type == SDL_MOUSEMOTION || e->type == SDL_MOUSEBUTTONDOWN || e->type == SDL_MOUSEBUTTONUP )
@@ -28,7 +50,7 @@ void Button::handleEvent(SDL_Event *e) {
 		bool inside = true;
 
 		//Mouse is outside of the button
-		if( x < _posX || x > _posX + _objWidth || y < _posY || y > _posY + _objHeight){ inside = false; }
+		if( x < _xPos || x > _xPos + _width || y < _yPos || y > _yPos + _height){ inside = false; }
 
 		//Mouse is inside button
 		if( inside && e->type == SDL_MOUSEBUTTONDOWN) { 
@@ -44,7 +66,7 @@ bool Button::get_triggered() {
     return triggered;
 }
 
-void Button::update() {
+/*void Button::update() {
     switch(_buttonType) {
         case Start: 
 			setPos((SCREEN_WIDTH - getWidth())/ 2, SCREEN_HEIGHT * 2 / 3); 
@@ -58,4 +80,4 @@ void Button::update() {
 			break;
     }
     render(_posX, _posY);
-}
+}*/

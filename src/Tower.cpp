@@ -40,6 +40,8 @@ bool Tower::valid_pos(int posX,int posY){
         else
             return false;
     }
+    else
+        return false;
 }
 
 bool Tower::valid_move(int posX,int posY){
