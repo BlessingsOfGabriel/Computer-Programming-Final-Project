@@ -27,7 +27,7 @@ Button::Button(ButtonType _type): Obj(), triggered(false) {
     //Initialize
     _buttonType = _type;
     loadTexture(typeToString(_buttonType));
-};
+}
 
 Button::~Button() {
     free();
@@ -39,8 +39,8 @@ Button::~Button() {
     _posY = y;
 }*/
 
-void Button::handleEvent(SDL_Event *e) {
-	if( e->type == SDL_MOUSEMOTION || e->type == SDL_MOUSEBUTTONDOWN || e->type == SDL_MOUSEBUTTONUP )
+void Button::handleEvent(SDL_Event *event) {
+	if( event -> type == SDL_MOUSEMOTION || event -> type == SDL_MOUSEBUTTONDOWN || event -> type == SDL_MOUSEBUTTONUP )
 	{
 		//Get mouse position
 		int x, y;
@@ -53,16 +53,16 @@ void Button::handleEvent(SDL_Event *e) {
 		if( x < _xPos || x > _xPos + _width || y < _yPos || y > _yPos + _height){ inside = false; }
 
 		//Mouse is inside button
-		if( inside && e->type == SDL_MOUSEBUTTONDOWN) { 
+		if( inside && event -> type == SDL_MOUSEBUTTONDOWN) { 
             triggered = true; 
         }
 	}
 }
 
-void Button::set_triggered(bool state) {
+void Button::setTriggered(bool state) {
     triggered = state;
 }
-bool Button::get_triggered() {
+bool Button::getTriggered() {
     return triggered;
 }
 

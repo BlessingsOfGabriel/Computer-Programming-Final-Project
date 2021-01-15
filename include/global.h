@@ -3,12 +3,12 @@
 #include <SDL2/SDL.h>
 #include <SDL2/SDL_image.h>
 #include <SDL2/SDL_mixer.h>
+#include <SDL2/SDL_ttf.h>
 #include <string>
 #include <stdlib.h>
 #include <stdio.h>
 #include <iostream>
 #include <math.h>
-#include <algorithm>
 #include <vector>
 #include <map>
 #include <time.h>
@@ -16,8 +16,10 @@
 enum GameState {
     Menu,
     Loading,
-    Playing,
-    Store,
+    Playing_1,
+    Playing_2,
+    Store_1,
+    Store_2,
     GameOver,
     Quit
 };
@@ -27,9 +29,6 @@ enum ButtonType {
     Start, Restart, Buy, EndTurn, Common
 };
 
-enum UnitType {
-    Soldier, Archer, Knight, Tower, GoldTower
-};
 
 extern SDL_Window* gWindow;
 extern SDL_Renderer* gRenderer;

@@ -4,7 +4,7 @@
 #include "global.h"
 #include "Obj.h"
 
-
+std::string typeToString(ButtonType _type);
 class Button : public Obj {
     private:
         ButtonType _buttonType;
@@ -12,11 +12,8 @@ class Button : public Obj {
     public:
         Button(ButtonType);
         ~Button();
-        void handleEvent(SDL_Event *e);
-        void setPos(int x, int y);
-        void set_triggered(bool);
-        bool get_triggered();
-        void update();
+        void handleEvent(SDL_Event *event);
+        void setTriggered(bool);
+        bool getTriggered();
 };
-
 #endif
