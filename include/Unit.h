@@ -10,6 +10,7 @@ public:
 	virtual bool valid_attack(int posX, int posY);
 	virtual bool valid_pos(int posX,int posY);
 	bool deathchecker;
+	void updatePersonality;
 
     friend class Board;
 
@@ -24,5 +25,6 @@ protected:
 	int _xpos;
 	int _ypos;
     std::string _name;
+    std::string personality;
 };
 #endif

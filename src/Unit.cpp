@@ -25,5 +25,8 @@ bool Unit::valid_pos(int posX,int posY){
     return true;
 }
 
-
+void updatePersonality()
+{
+    personality = _name + " (" + to_string(posX) + "," + to_string(posY) + ")   ATK: " + to_string(_damage) + "  HP: " + to_string(_health);
+}
 
