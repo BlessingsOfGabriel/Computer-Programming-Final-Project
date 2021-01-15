@@ -24,10 +24,12 @@ void Status::turn_plus(){
 int Status::calculate_gpt(){
     _goldAmount = round(_goldPerTurn + (_goldAmount + _goldPerTurn)*0.2);
     return _goldAmount;
+    update();
 }
 
 void Status::add_Unit(Unit unit){
     _unitList.push_back(unit);
+    update();
 }
 
 void Status::delete_Unit(int x,int y){
@@ -36,10 +38,12 @@ void Status::delete_Unit(int x,int y){
         if(*it._xpos==x && *it._ypos==y)
             _unitList.erase(it);
     }
+    update();
 }
 
 void Status::minus_gold(int x){
     _goldAmount -= x;
+    update();
 }
 
 bool Status::valid_buy(UnitType type){
@@ -118,4 +122,9 @@ void status::updateStatusSurface()
     SDL_Rect renderQuad = (_statusFaction == 0) ?{0,0, 200,1600}:{1800,0,200,1600};
     SDL_RenderCopy( surfaceRenderer, surfaceTexture, NULL, &renderQuad );
     SDL_RenderPresent(surfaceRenderer);
+}
+
+void status::update(){
+    updateStatusString();
+    updateStatusSurface();
 }

@@ -10,7 +10,7 @@ public:
 	virtual bool valid_attack(int posX, int posY);
 	virtual bool valid_pos(int posX,int posY);
 	bool deathchecker;
-	void updatePersonality;
+	void updatePersonality();
 	int getFaction();
 
     friend class Board;

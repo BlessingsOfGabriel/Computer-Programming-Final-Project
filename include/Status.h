@@ -27,6 +27,7 @@ public:
     void free();
 
     void updateStatusSurface();
+    void update();
 
 protected:
 	int _goldPerTurn;
