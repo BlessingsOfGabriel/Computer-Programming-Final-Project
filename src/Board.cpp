@@ -37,11 +37,11 @@ void Board::move(int y,int x,int posY,int posX){
 
 void Board::attack(int y,int x,int posY,int posX){
     if(((posX==0&&(posY==17||posY==18||posY==19)) || ((posX==1)&&(posY==17||posY==18||posY==19)) ||(posX==2&&(posY==17||posY==18||posY==19))) && _current[x][y]._faction == 0){
-        if(_current[x][y].valid_attack(_posX,_posY))
+        if(_current[x][y].valid_attack(posY,posX))
             _base1 -= _current[x][y]._damage;
     }
     else if(((posY==0&&(posX==17||posY==19||posY==19)) || (posY==1&&(posX==17||posY==19||posY==19)) || (posY==2&&(posX==17||posY==19||posY==19))) && _current[x][y]._faction == 1){
-        if(_current[x][y].valid_attack(_posX,_posY))
+        if(_current[x][y].valid_attack(posY,posX))
             _base0 -= _current[x][y]._damage;
     }
 
