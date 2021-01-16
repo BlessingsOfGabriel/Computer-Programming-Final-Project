@@ -15,7 +15,11 @@
 
 enum GameState {
     Menu,
-    Loading,
+    Loading_1,
+    Loading_2,
+    Loading_3,
+    Loading_4,
+    Loading_5,
     Playing_1,
     Playing_2,
     Store_1,

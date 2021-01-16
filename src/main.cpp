@@ -30,7 +30,11 @@ std::pair<int, int> boardToAct(std::pair<int, int>);
 void initialize();
 void loadMedia();
 void menu(SDL_Event& event);
-void loading(SDL_Event& event);
+void loading1(SDL_Event& event);
+void loading2(SDL_Event& event);
+void loading3(SDL_Event& event);
+void loading4(SDL_Event& event);
+void loading5(SDL_Event& event);
 void playing1(SDL_Event& event);
 void playing2(SDL_Event& event);
 void gameover(SDL_Event& event);
@@ -105,17 +109,15 @@ void loadMedia(){
             tiles[i][j] = new Button(Common);
 
     StartMenu.loadTexture("StartMenu");
-    Load.loadTexture("Tutorial1");
     GameOver1.loadTexture("GameOver1");
     GameOver2.loadTexture("GameOver2");
     loadedSound.playSound(4, "BGM", -1);
 }
 
 void menu(SDL_Event& event){
-	while( SDL_PollEvent(&event) != 0 ) {
-        if (startButton->getTriggered() == true) {
-            gameState = Loading1;
-            startButton->setTriggered(false);
+	while( SDL_PollEvent(&event) != 0 ){
+		if(event.key.keysym.sym == SDLK_SPACE && event.key.type == SDL_KEYUP){
+            gameState = Loading_1;
             break;
         }
         else if (event.type == SDL_QUIT) { gameState = Quit; break; }
@@ -124,14 +126,12 @@ void menu(SDL_Event& event){
     SDL_RenderClear( gRenderer);
 	StartMenu.resize(SCREEN_WIDTH, SCREEN_HEIGHT);
     StartMenu.render(0, 0);
-	startButton -> setPos(SCREEN_WIDTH / 2 - 50, SCREEN_HEIGHT * 3 / 4);
-	startButton -> render(SCREEN_WIDTH / 2 - 50, SCREEN_HEIGHT * 3 / 4);
     SDL_RenderPresent( gRenderer );
 }
 
 void loading1(SDL_Event& event){
 	while( SDL_PollEvent(&event) != 0 ) {
-        if (event.key.keysym.sym == SDLK_SPACE) {
+        if (event.key.keysym.sym == SDLK_RIGHT && event.key.type == SDL_KEYUP) {
             gameState = Loading_2;
             break;
         }
@@ -139,73 +139,89 @@ void loading1(SDL_Event& event){
     }
     SDL_RenderClear( gRenderer );
 
-    Load.render(0, 0);
+	Load.loadTexture("Tutorial1");
     Load.resize(SCREEN_WIDTH, SCREEN_HEIGHT);
+	Load.render(0, 0);
     SDL_RenderPresent( gRenderer );
 }
 
 void loading2(SDL_Event& event){
 	while( SDL_PollEvent(&event) != 0 ) {
-        if (event.key.keysym.sym == SDLK_SPACE) {
+        if (event.key.keysym.sym == SDLK_RIGHT && event.key.type == SDL_KEYUP) {
             gameState = Loading_3;
             break;
         }
+		else if(event.key.keysym.sym == SDLK_LEFT && event.key.type == SDL_KEYUP){
+			gameState = Loading_1;
+			break;
+		}
         else if (event.type == SDL_QUIT) { gameState = Quit; break; }
     }
     SDL_RenderClear( gRenderer );
 
 	Load.loadTexture("Tutorial2");
+	Load.resize(SCREEN_WIDTH, SCREEN_HEIGHT);
     Load.render(0, 0);
-    Load.resize(SCREEN_WIDTH, SCREEN_HEIGHT);
     SDL_RenderPresent( gRenderer );
 }
 
 void loading3(SDL_Event& event){
 	while( SDL_PollEvent(&event) != 0 ) {
-        if (event.key.keysym.sym == SDLK_SPACE) {
+        if (event.key.keysym.sym == SDLK_RIGHT && event.key.type == SDL_KEYUP){
             gameState = Loading_4;
             break;
         }
+		else if(event.key.keysym.sym == SDLK_LEFT && event.key.type == SDL_KEYUP){
+			gameState = Loading_2;
+			break;
+		}
         else if (event.type == SDL_QUIT) { gameState = Quit; break; }
     }
     SDL_RenderClear( gRenderer );
 
 	Load.loadTexture("Tutorial3");
+	Load.resize(SCREEN_WIDTH, SCREEN_HEIGHT);
     Load.render(0, 0);
-    Load.resize(SCREEN_WIDTH, SCREEN_HEIGHT);
     SDL_RenderPresent( gRenderer );
 }
 
 void loading4(SDL_Event& event){
 	while( SDL_PollEvent(&event) != 0 ) {
-        if (event.key.keysym.sym == SDLK_SPACE) {
+        if (event.key.keysym.sym == SDLK_RIGHT && event.key.type == SDL_KEYUP){
             gameState = Loading_5;
             break;
         }
-		else if(event.key.keysym.sym == SDLK_SPACE)
+		else if(event.key.keysym.sym == SDLK_LEFT && event.key.type == SDL_KEYUP){
+			gameState = Loading_3;
+			break;
+		}
         else if (event.type == SDL_QUIT) { gameState = Quit; break; }
     }
     SDL_RenderClear( gRenderer );
 
 	Load.loadTexture("Tutorial4");
+	Load.resize(SCREEN_WIDTH, SCREEN_HEIGHT);
     Load.render(0, 0);
-    Load.resize(SCREEN_WIDTH, SCREEN_HEIGHT);
     SDL_RenderPresent( gRenderer );
 }
 
 void loading5(SDL_Event& event){
 	while( SDL_PollEvent(&event) != 0 ) {
-        if (event.key.keysym.sym == SDLK_SPACE) {
+        if (event.key.keysym.sym == SDLK_SPACE && event.key.type == SDL_KEYUP){
             gameState = Playing_1;
             break;
         }
+		else if(event.key.keysym.sym == SDLK_LEFT && event.key.type == SDL_KEYUP){
+			gameState = Loading_4;
+			break;
+		}
         else if (event.type == SDL_QUIT) { gameState = Quit; break; }
     }
     SDL_RenderClear( gRenderer );
 
 	Load.loadTexture("Tutorial5");
+	Load.resize(SCREEN_WIDTH, SCREEN_HEIGHT);
     Load.render(0, 0);
-    Load.resize(SCREEN_WIDTH, SCREEN_HEIGHT);
     SDL_RenderPresent( gRenderer );
 }
 
@@ -333,7 +349,7 @@ void playing2(SDL_Event& event){
 void gameover(SDL_Event& event){
 	while( SDL_PollEvent(&event) != 0 ) {
         if (restartButton->getTriggered() == true) {
-            gameState = Loading;
+            gameState = Menu;
             restartButton->setTriggered(false);
             loadedSound.playSound(4, "BGM", -1);
             break;
