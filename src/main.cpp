@@ -10,6 +10,7 @@
 #include "Status.h"
 #include "Tower.h"
 #include "Unit.h"
+#include <iostream>
 
 SDL_Window* gWindow = NULL;
 SDL_Renderer* gRenderer = NULL;
@@ -68,6 +69,7 @@ int main(int argc, char* argv[]){
 }
 
 void initialize(){
+	//std::cout << "a";
     if (SDL_Init(SDL_INIT_VIDEO | SDL_INIT_AUDIO) < 0) 
 		throw SDL_GetError();
     if (!SDL_SetHint( SDL_HINT_RENDER_SCALE_QUALITY, "1" )) 

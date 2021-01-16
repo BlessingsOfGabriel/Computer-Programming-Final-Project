@@ -7,7 +7,7 @@ LoadedTexture::LoadedTexture() {
     free();
     _loadedTextures.clear();
     // set all texture to load
-    std::string names[] = {};
+    std::string names[24] = {};
     for (int i = 0;i < 50; i++) _toLoadFileName.push_back(names[i]);
 }
 
