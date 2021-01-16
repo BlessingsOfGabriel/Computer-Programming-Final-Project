@@ -3,6 +3,7 @@
 #include "Obj.h"
 #include "Unit.h"
 #include "global.h"
+#include "Board.h"
 
 class Status: public Obj{
 public:
@@ -13,7 +14,7 @@ public:
 	void add_Unit(Unit);
 	void delete_Unit(int,int);
 	void minus_gold(int);
-	bool valid_buy(UnitType);
+	bool valid_buy(int);
     SDL_Renderer *surfaceRenderer = NULL;
 
     TTF_Font* gFont = TTF_OpenFont("arial.ttf",12);
