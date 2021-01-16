@@ -55,7 +55,11 @@ int main(int argc, char* argv[]){
         SDL_GetWindowSize(gWindow, &SCREEN_WIDTH, &SCREEN_HEIGHT);
         switch (gameState) {
             case Menu: menu(event); break;
-            case Loading: loading(event); break;
+            case Loading_1: loading1(event); break;
+			case Loading_2: loading2(event); break;
+			case Loading_3: loading3(event); break;
+			case Loading_4: loading4(event); break;
+			case Loading_5: loading5(event); break;
             case Playing_1: playing1(event); break;
 			case Playing_2: playing2(event); break;
 			case Store_1: store1(event); break;
@@ -101,7 +105,7 @@ void loadMedia(){
             tiles[i][j] = new Button(Common);
 
     StartMenu.loadTexture("StartMenu");
-    Load.loadTexture("LoadingMenu");
+    Load.loadTexture("Tutorial1");
     GameOver1.loadTexture("GameOver1");
     GameOver2.loadTexture("GameOver2");
     loadedSound.playSound(4, "BGM", -1);
@@ -110,7 +114,7 @@ void loadMedia(){
 void menu(SDL_Event& event){
 	while( SDL_PollEvent(&event) != 0 ) {
         if (startButton->getTriggered() == true) {
-            gameState = Loading;
+            gameState = Loading1;
             startButton->setTriggered(false);
             break;
         }
@@ -125,7 +129,71 @@ void menu(SDL_Event& event){
     SDL_RenderPresent( gRenderer );
 }
 
-void loading(SDL_Event& event){
+void loading1(SDL_Event& event){
+	while( SDL_PollEvent(&event) != 0 ) {
+        if (event.key.keysym.sym == SDLK_SPACE) {
+            gameState = Loading_2;
+            break;
+        }
+        else if (event.type == SDL_QUIT) { gameState = Quit; break; }
+    }
+    SDL_RenderClear( gRenderer );
+
+    Load.render(0, 0);
+    Load.resize(SCREEN_WIDTH, SCREEN_HEIGHT);
+    SDL_RenderPresent( gRenderer );
+}
+
+void loading2(SDL_Event& event){
+	while( SDL_PollEvent(&event) != 0 ) {
+        if (event.key.keysym.sym == SDLK_SPACE) {
+            gameState = Loading_3;
+            break;
+        }
+        else if (event.type == SDL_QUIT) { gameState = Quit; break; }
+    }
+    SDL_RenderClear( gRenderer );
+
+	Load.loadTexture("Tutorial2");
+    Load.render(0, 0);
+    Load.resize(SCREEN_WIDTH, SCREEN_HEIGHT);
+    SDL_RenderPresent( gRenderer );
+}
+
+void loading3(SDL_Event& event){
+	while( SDL_PollEvent(&event) != 0 ) {
+        if (event.key.keysym.sym == SDLK_SPACE) {
+            gameState = Loading_4;
+            break;
+        }
+        else if (event.type == SDL_QUIT) { gameState = Quit; break; }
+    }
+    SDL_RenderClear( gRenderer );
+
+	Load.loadTexture("Tutorial3");
+    Load.render(0, 0);
+    Load.resize(SCREEN_WIDTH, SCREEN_HEIGHT);
+    SDL_RenderPresent( gRenderer );
+}
+
+void loading4(SDL_Event& event){
+	while( SDL_PollEvent(&event) != 0 ) {
+        if (event.key.keysym.sym == SDLK_SPACE) {
+            gameState = Loading_5;
+            break;
+        }
+		else if(event.key.keysym.sym == SDLK_SPACE)
+        else if (event.type == SDL_QUIT) { gameState = Quit; break; }
+    }
+    SDL_RenderClear( gRenderer );
+
+	Load.loadTexture("Tutorial4");
+    Load.render(0, 0);
+    Load.resize(SCREEN_WIDTH, SCREEN_HEIGHT);
+    SDL_RenderPresent( gRenderer );
+}
+
+void loading5(SDL_Event& event){
 	while( SDL_PollEvent(&event) != 0 ) {
         if (event.key.keysym.sym == SDLK_SPACE) {
             gameState = Playing_1;
@@ -133,9 +201,9 @@ void loading(SDL_Event& event){
         }
         else if (event.type == SDL_QUIT) { gameState = Quit; break; }
     }
-    SDL_SetRenderDrawColor( gRenderer, 182, 196, 182, 0 );
     SDL_RenderClear( gRenderer );
 
+	Load.loadTexture("Tutorial5");
     Load.render(0, 0);
     Load.resize(SCREEN_WIDTH, SCREEN_HEIGHT);
     SDL_RenderPresent( gRenderer );
