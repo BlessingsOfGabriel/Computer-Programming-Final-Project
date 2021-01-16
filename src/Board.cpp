@@ -34,7 +34,7 @@ void Board::move(int x,int y,int posX,int posY){
     if(_current[y][x] -> valid_move(posX,posY)){
         _current[y][x] -> _xpos = posX;
         _current[y][x] -> _ypos = posY;
-        _current[posX][posY] = _current[y][x];
+        _current[posY][posX] = _current[y][x];
         _current[y][x]->_faction = -1;
     }
 }
