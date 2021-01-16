@@ -34,7 +34,6 @@ protected:
 	int _goldAmount;
 	int _turn;
 	std::vector<Unit> _unitList;
-	int _baseHealth;
 	int _statusFaction;
 };
 #endif

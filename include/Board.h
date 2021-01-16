@@ -12,8 +12,13 @@ public:
     void move(int x,int y,int posX,int posY);
     void attack(int x,int y,int posX,int posY);
     Unit& getUnit(int x,int y);
+    int get_base0();
+    int get_base1();
+
 
 protected:
 	Unit* *_current;
+    int _base0;
+    int _base1;
 };
 #endif

@@ -1,9 +1,10 @@
 #include "Status.h"
 #include "Obj.h"
 #include "global.h"
+#include "Board.h"
 #include <cmath>
-#include<vector>
-#include<string>
+#include <vector>
+#include <string>
 
 using namespace std;
 
@@ -12,7 +13,6 @@ Status::Status(int x){
     _turn = 0;
     _goldPerTurn = 5;
     _goldAmount = 0;
-    _baseHealth = 10;
 }
 
 Status::~Status(){}
@@ -99,6 +99,11 @@ void status::updateStatusString()
     }
     statusString += "GoldAmounts: ";
     statusString += to_string(_goldAmount);
+    statusString += "\n";
+    if(_statusFaction == 1)
+        statusString += to_string(_base1);
+    else if(_statusFaction == 0)
+        statusFaction += to_string(_base0);
 }
 
 void status::free()
