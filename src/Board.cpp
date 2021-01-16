@@ -19,23 +19,23 @@ Board::~Board(){
 	delete[] _current;
 }
 
-void Board::add_unit(int posX,int posY,Unit new_unit){
-    if(new_unit.valid_pos(posX,posY))
+void Board::add_unit(int posY,int posX,Unit new_unit){
+    if(new_unit.valid_pos(posY,posX))
         _current[posX][posY] = new_unit;
 }
 
-void Board::delete_unit(int posX,int posY){
+void Board::delete_unit(int posY,int posX){
     _current[posX][posY]._faction = -1;
 }
 
-void Board::move(int x,int y,int posX,int posY){
+void Board::move(int y,int x,int posY,int posX){
     if(_current[x][y].valid_move(posX,posY)){
         _current[x][y]._xpos = posX;
         _current[x][y]._ypos = posY;
     }
 }
 
-void Board::attack(int x,int y,int posX,int posY){
+void Board::attack(int y,int x,int posY,int posX){
     if(((posX==0&&(posY==17||posY==18||posY==19)) || ((posX==1)&&(posY==17||posY==18||posY==19)) ||(posX==2&&(posY==17||posY==18||posY==19))) && _current[x][y]._faction == 0){
         if(_current[x][y].valid_attack(_posX,_posY))
             _base1 -= _current[x][y]._damage;
@@ -59,7 +59,7 @@ void Board::attack(int x,int y,int posX,int posY){
     }
 }
 
-Unit& Board::getUnit(int x,int y){
+Unit& Board::getUnit(int y,int x){
     return _current[x][y];
 }
 
