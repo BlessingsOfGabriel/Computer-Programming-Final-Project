@@ -19,48 +19,48 @@ Board::~Board(){
 	delete[] _current;
 }
 
-void Board::add_unit(int posY,int posX,Unit new_unit){
-    if(new_unit.valid_pos(posY,posX))
-        _current[posX][posY] = new_unit;
+void Board::add_unit(int posX,int posY,Unit new_unit){
+    if(new_unit.valid_pos(posX,posY))
+        _current[posY][posX] = new_unit;
 }
 
-void Board::delete_unit(int posY,int posX){
-    _current[posX][posY]._faction = -1;
+void Board::delete_unit(int posX,int posY){
+    _current[posY][posX]._faction = -1;
 }
 
-void Board::move(int y,int x,int posY,int posX){
-    if(_current[x][y].valid_move(posX,posY)){
-        _current[x][y]._xpos = posX;
-        _current[x][y]._ypos = posY;
+void Board::move(int x,int y,int posX,int posY){
+    if(_current[y][x].valid_move(posX,posY)){
+        _current[y][x]._xpos = posX;
+        _current[y][x]._ypos = posY;
     }
 }
 
-void Board::attack(int y,int x,int posY,int posX){
-    if(((posX==0&&(posY==17||posY==18||posY==19)) || ((posX==1)&&(posY==17||posY==18||posY==19)) ||(posX==2&&(posY==17||posY==18||posY==19))) && _current[x][y]._faction == 0){
-        if(_current[x][y].valid_attack(posY,posX))
-            _base1 -= _current[x][y]._damage;
+void Board::attack(int x,int y,int posX,int posY){
+    if(((posX==0&&(posY==17||posY==18||posY==19)) || ((posX==1)&&(posY==17||posY==18||posY==19)) ||(posX==2&&(posY==17||posY==18||posY==19))) && _current[y][x]._faction == 1){
+        if(_current[y][x].valid_attack(posX,posY))
+            _base0 -= _current[y][x]._damage;
     }
-    else if(((posY==0&&(posX==17||posY==19||posY==19)) || (posY==1&&(posX==17||posY==19||posY==19)) || (posY==2&&(posX==17||posY==19||posY==19))) && _current[x][y]._faction == 1){
-        if(_current[x][y].valid_attack(posY,posX))
-            _base0 -= _current[x][y]._damage;
+    else if(((posY==0&&(posX==17||posY==19||posY==19)) || (posY==1&&(posX==17||posY==19||posY==19)) || (posY==2&&(posX==17||posY==19||posY==19))) && _current[x][y]._faction == 0){
+        if(_current[y][x].valid_attack(posX,posY))
+            _base1 -= _current[y][x]._damage;
     }
 
     else{
-        if(_current[x][y].valid_attack(_current[posX][posY]._xpos,_current[posX][posY]._ypos)){
-            _current[posX][posY]._health -= _current[x][y]._damage;
-            if(_current[posX][posY]._health>0)
-                _current[posX][posY].deathchecker = 1;
+        if(_current[y][x].valid_attack(_current[posY][posX]._xpos,_current[posY][posX]._ypos)){
+            _current[posY][posX]._health -= _current[y][x]._damage;
+            if(_current[posY][posX]._health>0)
+                _current[posY][posX].deathchecker = 1;
             else{
-                _current[posX][posY].deathchecker = 0;
-                delete_unit(_current[posX][posY]._xpos,_current[posX][posY]._ypos);
+                _current[posY][posX].deathchecker = 0;
+                delete_unit(_current[posY][posX]._xpos,_current[posY][posX]._ypos);
             }
 
         }
     }
 }
 
-Unit& Board::getUnit(int y,int x){
-    return _current[x][y];
+Unit& Board::getUnit(int x,int y){
+    return _current[y][x];
 }
 
 int Board::get_base0(){
