@@ -22,7 +22,7 @@ Board::~Board(){
 }
 
 void Board::add_unit(int posX,int posY,Unit* new_unit){
-    if(new_unit -> valid_pos(posX,posY))
+    if(new_unit -> valid_pos(posX,posY) && _current[posY][posX]-> _faction == -1)
         _current[posY][posX] = new_unit;
 }
 
@@ -34,6 +34,8 @@ void Board::move(int x,int y,int posX,int posY){
     if(_current[y][x] -> valid_move(posX,posY)){
         _current[y][x] -> _xpos = posX;
         _current[y][x] -> _ypos = posY;
+        _current[posX][posY] = _current[y][x];
+        _current[y][x]->_faction = -1;
     }
 }
 
