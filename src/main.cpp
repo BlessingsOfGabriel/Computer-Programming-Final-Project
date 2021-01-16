@@ -13,10 +13,8 @@
 
 SDL_Window* gWindow = NULL;
 SDL_Renderer* gRenderer = NULL;
-int SCREEN_WIDTH = 1200;
-int SCREEN_HEIGHT = 800;
-int LEVEL_WIDTH = 2000;
-int LEVEL_HEIGHT = 2000;
+int SCREEN_WIDTH = 2000;
+int SCREEN_HEIGHT = 1200;
 GameState gameState;
 Button* startButton;
 Button* restartButton;
@@ -142,6 +140,8 @@ void playing1(SDL_Event& event){
 		Button *endTurn = Button(EndTurn);
 		if(endTurn->get_triggered()){
 			endTurn->set_triggered(false);
+			REGISTER.first = -1;
+			REGISTER.second = -1;
 			gameState = playing_2;
 			break;
 		}
@@ -154,7 +154,7 @@ void playing1(SDL_Event& event){
 						    REGISTER.first = i;
 						    REGISTER.second = j;
                         }
-						if(Board[i][j].getFaction == -1){
+						if(gBoard.getUnit(i, j).getFaction() == -1){
 							gameState = store1;
 							break;
 						}
@@ -162,15 +162,14 @@ void playing1(SDL_Event& event){
 							break;
 					}
 					else{
-						if(board[REGISTER.first][REGISTER.second].valid_move(i, j)){
+						if(gBoard.getUnit(REGISTER.first, REGISTER.second).valid_move(i, j)){
 							pair<int, int> newPos = boardToAct(pair<int, int>(i, j));
 							gBoard.getUnit(REGISTER.first, REGISTER.second).render(newPos.first, newPos.second);
-							SDL_RenderPresent(gRenderer);
-							gBoard.move(REGISTER.first, REGISTER.second);
+							gBoard.move(REGISTER.first, REGISTER.second, i, j);
 							break;
 						}
-						else if(board[REGISTER.first][REGISTER.second].valid_attack(i, j)){
-							gBoard[REGISTER.first][REGISTER.second].attack(gBoard[i][j]);
+						else if(gBoard.getUnit(REGISTER.first, REGISTER.second).valid_attack(i, j)){
+							gBoard.attack(REGISTER.first, REGISTER.second, i, j);
 							break;
 						}
 					}
@@ -178,8 +177,6 @@ void playing1(SDL_Event& event){
 			}
 		}
 	}
-    SDL_SetRenderDrawColor( gRenderer, 182, 196, 182, 0 );
-    SDL_RenderClear( gRenderer );
 
     for(int i = 0; i < 20; i++){
         for(int j = 0; j < 20; j++){
@@ -202,6 +199,8 @@ void playing2(SDL_Event& event){
 		}
 		if(endTurn->get_triggered()){
 			endTurn->set_triggered(false);
+			REGISTER.first = -1;
+			REGISTER.second = -1;
 			gameState = playing_1;
 			break;
 		}
@@ -214,7 +213,7 @@ void playing2(SDL_Event& event){
 						    REGISTER.first = i;
 						    REGISTER.second = j;
                         }
-						if(Board[i][j].getFaction == -1){
+						if(gBoard.getUnit(i, j).getFaction() == -1){
 							gameState = Store_2;
 							break;
 						}
@@ -222,15 +221,14 @@ void playing2(SDL_Event& event){
 							break;
 					}
 					else{
-						if(board[REGISTER.first][REGISTER.second].valid_move(i, j)){
+						if(gBoard.getUnit(REGISTER.first, REGISTER.second).valid_move(i, j)){
 							pair<int, int> newPos = boardToAct(pair<int, int>(i, j));
 							gBoard.getUnit(REGISTER.first, REGISTER.second).render(newPos.first, newPos.second);
-							SDL_RenderPresent(gRenderer);
-							gBoard.move(REGISTER.first, REGISTER.second);
+							gBoard.move(REGISTER.first, REGISTER.second, i, j);
 							break;
 						}
-						else if(board[REGISTER.first][REGISTER.second].valid_attack(i, j)){
-							gBoard[REGISTER.first][REGISTER.second].attack(gBoard[i][j]);
+						else if(gBoard.getUnit(REGISTER.first, REGISTER.second).valid_attack(i, j)){
+							gBoard.attack(REGISTER.first, REGISTER.second, i, j);
 							break;
 						}
 					}
@@ -239,7 +237,6 @@ void playing2(SDL_Event& event){
 		}
 	}
 	SDL_SetRenderDrawColor( gRenderer, 182, 196, 182, 0 );
-    SDL_RenderClear( gRenderer );
 
     for(int i = 0; i < 20; i++){
         for(int j = 0; j < 20; j++){
@@ -386,4 +383,11 @@ void close() {
 
 	IMG_Quit();
 	SDL_Quit();
+}
+
+pair<int, int> boardToAct(pair<int, int> boardPos){
+	pair<int, int> actPos;
+	actPos.first = boardPos.second * 60 + 400;
+	actPos.second = boardPos.first * 60;
+	return actPos;
 }
