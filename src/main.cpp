@@ -111,6 +111,8 @@ void loadMedia(){
     StartMenu.loadTexture("StartMenu");
     GameOver1.loadTexture("GameOver1");
     GameOver2.loadTexture("GameOver2");
+	gBoard.loadTexture("Board");
+	Store.loadTexture("Store");
     loadedSound.playSound(4, "BGM", -1);
 }
 
@@ -280,8 +282,8 @@ void playing1(SDL_Event& event){
             tiles[i][j] -> render(actPos.first, actPos.second);
         }
     }
-	gBoard.resize(1200, 1200);
-	gBoard.render(400, 0);
+	gBoard.resize(SCREEN_HEIGHT, SCREEN_HEIGHT);
+	gBoard.render((SCREEN_WIDTH - SCREEN_HEIGHT) / 2, 0);
 	SDL_RenderPresent( gRenderer );
 }
 
@@ -419,9 +421,8 @@ void store1(SDL_Event& event){
 			break;
 		}
 	}
-    Store.resize(2000, 1200);
+    Store.resize(SCREEN_WIDTH, SCREEN_HEIGHT);
     Store.render(0, 0);
-
     SDL_RenderPresent(gRenderer);
 }
 
