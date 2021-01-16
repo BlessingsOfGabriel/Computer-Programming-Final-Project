@@ -40,7 +40,6 @@ void close();
 
 
 int main(int argc, char* argv[]){
-    std::cout<<"a";
 	try {
         initialize();
         loadMedia();
@@ -54,6 +53,7 @@ int main(int argc, char* argv[]){
 
 	while (gameState != Quit) {
         SDL_GetWindowSize(gWindow, &SCREEN_WIDTH, &SCREEN_HEIGHT);
+		std::cout << SCREEN_WIDTH << " " << SCREEN_HEIGHT << " ";
         switch (gameState) {
             case Menu: menu(event); break;
             case Loading: loading(event); break;
