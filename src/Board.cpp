@@ -31,11 +31,13 @@ void Board::delete_unit(int posX,int posY){
 }
 
 void Board::move(int x,int y,int posX,int posY){
-    if(_current[y][x] -> valid_move(posX,posY)){
-        _current[y][x] -> _xpos = posX;
-        _current[y][x] -> _ypos = posY;
-        _current[posY][posX] = _current[y][x];
-        _current[y][x]->_faction = -1;
+    if(!((posX==0&&(posY==17||posY==18||posY==19)) || ((posX==1)&&(posY==17||posY==18||posY==19)) ||(posX==2&&(posY==17||posY==18||posY==19))) && !((posY==0&&(posX==17||posY==19||posY==19)) || (posY==1&&(posX==17||posY==19||posY==19)) || (posY==2&&(posX==17||posY==19||posY==19)))){
+        if(_current[y][x] -> valid_move(posX,posY)){
+            _current[y][x] -> _xpos = posX;
+            _current[y][x] -> _ypos = posY;
+            _current[posY][posX] = _current[y][x];
+            _current[y][x]->_faction = -1;
+        }
     }
 }
 
@@ -44,7 +46,7 @@ void Board::attack(int x,int y,int posX,int posY){
         if(_current[y][x] -> valid_attack(posX,posY))
             _base0 -= _current[y][x] -> _damage;
     }
-    else if(((posY==0&&(posX==17||posY==19||posY==19)) || (posY==1&&(posX==17||posY==19||posY==19)) || (posY==2&&(posX==17||posY==19||posY==19))) && _current[x][y] -> _faction == 0){
+    else if(((posY==0&&(posX==17||posY==19||posY==19)) || (posY==1&&(posX==17||posY==19||posY==19)) || (posY==2&&(posX==17||posY==19||posY==19))) && _current[y][x] -> _faction == 0){
         if(_current[y][x] -> valid_attack(posX,posY))
             _base1 -= _current[y][x] ->_damage;
     }
