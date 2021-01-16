@@ -34,10 +34,10 @@ Button::~Button() {
     triggered = false;
 }
 
-/*void Button::setPos(int x, int y) {
-    _posX = x;
-    _posY = y;
-}*/
+void Button::setPos(int x, int y) {
+    _xPos = x;
+    _yPos = y;
+}
 
 void Button::handleEvent(SDL_Event *event) {
 	if( event -> type == SDL_MOUSEMOTION || event -> type == SDL_MOUSEBUTTONDOWN || event -> type == SDL_MOUSEBUTTONUP )

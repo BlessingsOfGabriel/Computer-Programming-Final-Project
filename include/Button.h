@@ -15,5 +15,6 @@ class Button : public Obj {
         void handleEvent(SDL_Event *event);
         void setTriggered(bool);
         bool getTriggered();
+        void setPos(int, int);
 };
 #endif

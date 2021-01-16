@@ -53,7 +53,6 @@ int main(int argc, char* argv[]){
 
 	while (gameState != Quit) {
         SDL_GetWindowSize(gWindow, &SCREEN_WIDTH, &SCREEN_HEIGHT);
-		std::cout << SCREEN_WIDTH << " " << SCREEN_HEIGHT << " ";
         switch (gameState) {
             case Menu: menu(event); break;
             case Loading: loading(event); break;
@@ -74,7 +73,7 @@ void initialize(){
 		throw SDL_GetError();
     if (!SDL_SetHint( SDL_HINT_RENDER_SCALE_QUALITY, "1" ))
 		printf( "Warning: Linear texture filtering not enabled!" );
-    gWindow = SDL_CreateWindow( "ConquEEr", SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, SCREEN_WIDTH, SCREEN_HEIGHT, SDL_WINDOW_RESIZABLE );
+    gWindow = SDL_CreateWindow( "ConquEEror", SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, SCREEN_WIDTH, SCREEN_HEIGHT, SDL_WINDOW_RESIZABLE );
     if (gWindow == NULL)
 		throw SDL_GetError();
     gRenderer = SDL_CreateRenderer( gWindow, -1, SDL_RENDERER_ACCELERATED | SDL_RENDERER_PRESENTVSYNC );
@@ -118,10 +117,11 @@ void menu(SDL_Event& event){
         else if (event.type == SDL_QUIT) { gameState = Quit; break; }
         startButton->handleEvent(&event);
     }
-    SDL_SetRenderDrawColor( gRenderer, 182, 196, 182, 0 );
-    SDL_RenderClear( gRenderer );
+    SDL_RenderClear( gRenderer);
 	StartMenu.resize(SCREEN_WIDTH, SCREEN_HEIGHT);
     StartMenu.render(0, 0);
+	startButton -> setPos(SCREEN_WIDTH / 2 - 50, SCREEN_HEIGHT * 3 / 4);
+	startButton -> render(SCREEN_WIDTH / 2 - 50, SCREEN_HEIGHT * 3 / 4);
     SDL_RenderPresent( gRenderer );
 }
 
