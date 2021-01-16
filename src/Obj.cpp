@@ -41,8 +41,8 @@ void Obj::render(int posX,int posY){
 	SDL_Rect srcRect;
 	srcRect.x = _xPos;
 	srcRect.y = _yPos;
-	srcRect.w = _width;
-	srcRect.h = _height;
+	srcRect.w = 1284;
+	srcRect.h = 648;
 	SDL_Rect destRect;
 	destRect.x = posX;
     destRect.y = posY;

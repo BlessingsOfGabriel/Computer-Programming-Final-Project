@@ -7,8 +7,8 @@ LoadedTexture::LoadedTexture() {
     free();
     _loadedTextures.clear();
     // set all texture to load
-    std::string names[24] = {"Archer","base","Board","buy","EndButton","GameOver1","GameOver2","goldtower","Knight","Menu","Soldier","start","startagain","StartButton","Store1","store2","Tower","Tutorial1","Tutorial2","Tutorial3","Tutorial4","Tutorial5"};
-    for (int i = 0;i < 50; i++) _toLoadFileName.push_back(names[i]);
+    std::string names[22] = {"Archer","base","Board","buy","EndButton","GameOver1","GameOver2","goldtower","Knight","StartMenu","Soldier","start","startagain","StartButton","Store1","store2","Tower","Tutorial1","Tutorial2","Tutorial3","Tutorial4","Tutorial5"};
+    for (int i = 0;i < 22; i++) _toLoadFileName.push_back(names[i]);
 }
 
 LoadedTexture::~LoadedTexture() {
@@ -57,8 +57,8 @@ SDL_Texture* LoadedTexture::getTexture(std::string name) {
 LoadedSound::LoadedSound() {
     free();
     _loadedSound.clear();
-    std::string names[20] = {};
-    for (int i = 0;i < 17; i++) _toLoadFileName.push_back(names[i]);
+    std::string names[1] = {"BGM"};
+    for (int i = 0;i < 1; i++) _toLoadFileName.push_back(names[i]);
 }
 
 LoadedSound::~LoadedSound() {

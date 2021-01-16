@@ -69,7 +69,6 @@ int main(int argc, char* argv[]){
 }
 
 void initialize(){
-	//std::cout << "a";
     if (SDL_Init(SDL_INIT_VIDEO | SDL_INIT_AUDIO) < 0) 
 		throw SDL_GetError();
     if (!SDL_SetHint( SDL_HINT_RENDER_SCALE_QUALITY, "1" )) 
@@ -102,7 +101,7 @@ void loadMedia(){
             tiles[i][j] = new Button(Common);
 
     StartMenu.loadTexture("StartMenu");
-    Load.loadTexture("loadingmenu");
+    Load.loadTexture("LoadingMenu");
     GameOver1.loadTexture("GameOver1");
     GameOver2.loadTexture("GameOver2");
     loadedSound.playSound(4, "BGM", -1);
@@ -120,11 +119,9 @@ void menu(SDL_Event& event){
     }
     SDL_SetRenderDrawColor( gRenderer, 182, 196, 182, 0 );
     SDL_RenderClear( gRenderer );
-
     StartMenu.render(0, 0);
-    StartMenu.resize(1200, 800);
-    startButton->resize(300, 50);
-
+	system("PAUSE");
+    StartMenu.resize(SCREEN_WIDTH, SCREEN_HEIGHT);
     SDL_RenderPresent( gRenderer );
 }
 
