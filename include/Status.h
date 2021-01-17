@@ -9,11 +9,11 @@ class Status: public Obj{
 public:
     Status(int);
     ~Status();
-	int calculate_gpt();
+	int calculate_gpt(int, int);
 	void turn_plus();
-	void add_Unit(Unit);
-	void delete_Unit(int,int);
-	void minus_gold(int);
+	void add_Unit(Unit, int, int);
+	void delete_Unit(int,int, int, int);
+	void minus_gold(int, int, int);
 	bool valid_buy(int);
     SDL_Renderer *surfaceRenderer = NULL;
 
@@ -27,8 +27,8 @@ public:
 
     void free();
 
-    void updateStatusSurface();
-    void update();
+    void updateStatusSurface(int, int);
+    void update(int, int);
 
 protected:
 	int _goldPerTurn;

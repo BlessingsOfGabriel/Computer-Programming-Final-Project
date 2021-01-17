@@ -234,14 +234,12 @@ void playing1(SDL_Event& event){
             gameState = GameOver;
             break;
 		}
-		if(endTurnButton->getTriggered()){
-			endTurnButton->setTriggered(false);
+		if(event.key.keysym.sym == SDLK_e && event.key.type == SDL_KEYUP){
 			REGISTER.first = -1;
 			REGISTER.second = -1;
 			gameState = Playing_2;
 			break;
 		}
-		endTurnButton -> handleEvent(&event);
 		for(int i = 0; i < 20; i++){
 			for(int j = 0; j < 20; j++){
 				if(tiles[i][j] -> getTriggered()){
@@ -284,6 +282,9 @@ void playing1(SDL_Event& event){
     }
 	gBoard.resize(SCREEN_HEIGHT, SCREEN_HEIGHT);
 	gBoard.render((SCREEN_WIDTH - SCREEN_HEIGHT) / 2, 0);
+	system("PAUSE");
+	Status1.update(SCREEN_WIDTH, SCREEN_HEIGHT);
+	Status2.update(SCREEN_WIDTH, SCREEN_HEIGHT);
 	SDL_RenderPresent( gRenderer );
 }
 
