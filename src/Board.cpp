@@ -10,6 +10,9 @@ Board::Board(){
         _current[i] = new Unit*[20];
     _base0 = 10;
     _base1 = 10;
+    for(int i=0;i<20;i++)
+        for(int j=0;j<20;j++)
+            _current[i][j] = new Unit();
 }
 
 Board::~Board(){
