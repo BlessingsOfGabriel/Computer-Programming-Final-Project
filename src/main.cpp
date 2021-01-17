@@ -14,7 +14,6 @@
 
 SDL_Window* gWindow = NULL;
 SDL_Renderer* gRenderer = NULL;
-TTF_Font* gFont = NULL;
 int SCREEN_WIDTH = 2000;
 int SCREEN_HEIGHT = 1200;
 GameState gameState;
@@ -95,7 +94,6 @@ void initialize(){
     if( Mix_OpenAudio( 44100, MIX_DEFAULT_FORMAT, 2, 2048 ) < 0 )
 		throw Mix_GetError();
 	TTF_Init();
-	gFont = TTF_OpenFont("Fonts/Aaargh.ttf", 40);
 }
 
 void loadMedia(){
@@ -271,6 +269,7 @@ void playing1(SDL_Event& event){
 						}
 					}
 				}
+				tiles[i][j] -> setTriggered(false);
 			}
 		}
 		for(int i = 0; i < 20; i++)
@@ -415,15 +414,17 @@ void store1(SDL_Event& event){
 			buy[4] -> setTriggered(false);
 			break;
 		}
+		for(int i = 0; i < 5; i++)
+			buy[i] -> handleEvent(&event);
 	}
 
+    Store.resize(SCREEN_WIDTH, SCREEN_HEIGHT);
+    Store.render(0, 0);
 	for(int i = 0; i < 5; i++){
 		buy[i] -> setPos(SCREEN_WIDTH * i / 5, SCREEN_HEIGHT * 3 / 4);
 		buy[i] -> resize(SCREEN_WIDTH / 5, SCREEN_WIDTH / 10);
 		buy[i] -> render(SCREEN_WIDTH * i / 5, SCREEN_HEIGHT * 3 / 4);
 	}
-    Store.resize(SCREEN_WIDTH, SCREEN_HEIGHT);
-    Store.render(0, 0);
     SDL_RenderPresent(gRenderer);
 }
 

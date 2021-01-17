@@ -10,6 +10,7 @@
 using namespace std;
 
 Status::Status(int x){
+    _statusString = "";
     _statusFaction = x;
     _turn = 0;
     _goldPerTurn = 5;

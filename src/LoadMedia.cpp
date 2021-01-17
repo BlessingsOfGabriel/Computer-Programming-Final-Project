@@ -7,7 +7,7 @@ LoadedTexture::LoadedTexture() {
     free();
     _loadedTextures.clear();
     // set all texture to load
-    std::string names[21] = {"Archer","Board","buy", "Common", "GameOver1","GameOver2","goldtower","Knight","StartMenu","Soldier","Start","startagain","StartButton","Store","store2","Tower","Tutorial1","Tutorial2","Tutorial3","Tutorial4","Tutorial5"};
+    std::string names[21] = {"Archer","Board","Buy", "Common", "GameOver1","GameOver2","goldtower","Knight","StartMenu","Soldier","Start","startagain","StartButton","Store","store2","Tower","Tutorial1","Tutorial2","Tutorial3","Tutorial4","Tutorial5"};
     for (int i = 0;i < 21; i++) _toLoadFileName.push_back(names[i]);
 }
 
