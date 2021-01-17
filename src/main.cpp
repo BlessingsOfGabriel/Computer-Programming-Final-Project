@@ -268,15 +268,18 @@ void playing1(SDL_Event& event){
 						}
 					}
 				}
-				tiles[i][j] -> handleEvent(&event);
 			}
 		}
+		for(int i = 0; i < 20; i++)
+			for(int j = 0; j < 20; j++)
+				tiles[i][j] -> handleEvent(&event);
 	}
-
+	SDL_RenderClear( gRenderer );
     for(int i = 0; i < 20; i++){
         for(int j = 0; j < 20; j++){
             tiles[i][j] -> resize(60, 60);
             std::pair<int, int>actPos = boardToAct(std::pair<int, int>(i, j));
+			tiles[i][j] -> setPos(actPos.first, actPos.second);
             tiles[i][j] -> render(actPos.first, actPos.second);
         }
     }
@@ -424,28 +427,28 @@ void store2(SDL_Event& event){
 			buy[0] -> setTriggered(false);
 			break;
 		}
-        if(buy[1] -> getTriggered() && Status2.valid_buy(0)){
+        if(buy[1] -> getTriggered() && Status2.valid_buy(1)){
 			Unit* a = new Archer(1);
 			gBoard.add_unit(REGISTER.first, REGISTER.second, a);
 			gameState = Playing_2;
 			buy[1] -> setTriggered(false);
 			break;
 		}
-        if(buy[2] -> getTriggered() && Status2.valid_buy(0)){
+        if(buy[2] -> getTriggered() && Status2.valid_buy(2)){
 			Unit* a = new Knight(1);
 			gBoard.add_unit(REGISTER.first, REGISTER.second, a);
 			gameState = Playing_2;
 			buy[2] -> setTriggered(false);
 			break;
 		}
-        if(buy[3] -> getTriggered()){
+        if(buy[3] -> getTriggered() && Status2.valid_buy(3)){
 			Unit* a = new Tower(1);
 			gBoard.add_unit(REGISTER.first, REGISTER.second, a);
 			gameState = Playing_2;
 			buy[3] -> setTriggered(false);
 			break;
 		}
-        if(buy[4] -> getTriggered()){
+        if(buy[4] -> getTriggered() && Status2.valid_buy(4)){
 			Unit* a = new GoldTower(1);
 			gBoard.add_unit(REGISTER.first, REGISTER.second, a);
 			gameState = Playing_2;
@@ -485,7 +488,7 @@ void close() {
 
 std::pair<int, int> boardToAct(std::pair<int, int> boardPos){
 	std::pair<int, int> actPos;
-	actPos.first = boardPos.second * 60 + 400;
-	actPos.second = boardPos.first * 60;
+	actPos.first = (SCREEN_WIDTH - SCREEN_HEIGHT) / 2 + SCREEN_HEIGHT * boardPos.second / 20;
+	actPos.second = SCREEN_HEIGHT * boardPos.first / 20;
 	return actPos;
 }
