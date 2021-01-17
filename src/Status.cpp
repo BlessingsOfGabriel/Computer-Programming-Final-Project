@@ -135,7 +135,6 @@ void Status::updateStatusSurface(int width, int height)
         renderQuad = {(width + height) / 2, 0, (width - height) / 2, height};
     }
     SDL_RenderCopy(statusRenderer, surfaceTexture, NULL, &renderQuad );
-    system("PAUSE");
     SDL_RenderPresent(statusRenderer);
 }
 
