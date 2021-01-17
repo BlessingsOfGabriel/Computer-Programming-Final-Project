@@ -282,7 +282,6 @@ void playing1(SDL_Event& event){
     }
 	gBoard.resize(SCREEN_HEIGHT, SCREEN_HEIGHT);
 	gBoard.render((SCREEN_WIDTH - SCREEN_HEIGHT) / 2, 0);
-	system("PAUSE");
 	Status1.update(SCREEN_WIDTH, SCREEN_HEIGHT);
 	Status2.update(SCREEN_WIDTH, SCREEN_HEIGHT);
 	SDL_RenderPresent( gRenderer );
@@ -351,36 +350,25 @@ void playing2(SDL_Event& event){
 
 void gameover(SDL_Event& event){
 	while( SDL_PollEvent(&event) != 0 ) {
-        if (restartButton->getTriggered() == true) {
+        if (event.key.keysym.sym == SDLK_SPACE && event.key.type == SDL_KEYUP){
             gameState = Menu;
-            restartButton->setTriggered(false);
-            loadedSound.playSound(4, "BGM", -1);
             break;
 		}
         else if (event.type == SDL_QUIT) {
 			gameState = Quit;
 			break;
 		}
-        restartButton->handleEvent(&event);
-        if (event.type == SDL_QUIT) {
-			gameState = Quit;
-			break;
-		}
     }
-    SDL_SetRenderDrawColor( gRenderer, 182, 196, 182, 0 );
     SDL_RenderClear( gRenderer );
 
     if(gBoard.get_base1() == 0) {
+		GameOver1.resize(SCREEN_WIDTH, SCREEN_HEIGHT);
         GameOver1.render(0,0);
-        GameOver1.resize(SCREEN_WIDTH, SCREEN_HEIGHT);
     }
     else {
+		GameOver1.resize(SCREEN_WIDTH, SCREEN_HEIGHT);
         GameOver2.render(0,0);
-        GameOver2.resize(SCREEN_WIDTH, SCREEN_HEIGHT);
     }
-
-    restartButton -> resize(350, 70);
-    restartButton -> render(825, 1000);
     SDL_RenderPresent( gRenderer );
 }
 
