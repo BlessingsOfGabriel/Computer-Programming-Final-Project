@@ -77,7 +77,7 @@ int main(int argc, char* argv[]){
 }
 
 void initialize(){
-    if (SDL_Init(SDL_INIT_VIDEO | SDL_INIT_AUDIO) < 0) 
+    if (SDL_Init(SDL_INIT_VIDEO | SDL_INIT_AUDIO) < 0)
 		throw SDL_GetError();
     if (!SDL_SetHint( SDL_HINT_RENDER_SCALE_QUALITY, "1" ))
 		printf( "Warning: Linear texture filtering not enabled!" );
@@ -234,7 +234,7 @@ void playing1(SDL_Event& event){
             gameState = GameOver;
             break;
 		}
-		if(event.key.keysym.sym == SDLK_e && event.key.type == SDL_KEYUP){
+		if(event.key.keysym.sym == SDLK_e,event.key.type == SDL_KEYUP){
 			REGISTER.first = -1;
 			REGISTER.second = -1;
 			gameState = Playing_2;
