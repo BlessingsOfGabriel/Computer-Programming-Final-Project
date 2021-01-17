@@ -40,6 +40,7 @@ void close();
 
 
 int main(int argc, char* argv[]){
+    std::cout<<"a";
 	try {
         initialize();
         loadMedia();
@@ -70,21 +71,21 @@ int main(int argc, char* argv[]){
 
 void initialize(){
 	//std::cout << "a";
-    if (SDL_Init(SDL_INIT_VIDEO | SDL_INIT_AUDIO) < 0) 
+    if (SDL_Init(SDL_INIT_VIDEO | SDL_INIT_AUDIO) < 0)
 		throw SDL_GetError();
-    if (!SDL_SetHint( SDL_HINT_RENDER_SCALE_QUALITY, "1" )) 
+    if (!SDL_SetHint( SDL_HINT_RENDER_SCALE_QUALITY, "1" ))
 		printf( "Warning: Linear texture filtering not enabled!" );
     gWindow = SDL_CreateWindow( "ConquEEr", SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, SCREEN_WIDTH, SCREEN_HEIGHT, SDL_WINDOW_RESIZABLE );
-    if (gWindow == NULL) 
+    if (gWindow == NULL)
 		throw SDL_GetError();
     gRenderer = SDL_CreateRenderer( gWindow, -1, SDL_RENDERER_ACCELERATED | SDL_RENDERER_PRESENTVSYNC );
-    if (gRenderer == NULL) 
+    if (gRenderer == NULL)
 		throw SDL_GetError();
     SDL_SetRenderDrawColor( gRenderer, 182, 196, 182, 100 );
     int imgFlags = IMG_INIT_PNG;
-    if (!(IMG_Init( imgFlags ) & imgFlags)) 
+    if (!(IMG_Init( imgFlags ) & imgFlags))
 		throw IMG_GetError();
-    if( Mix_OpenAudio( 44100, MIX_DEFAULT_FORMAT, 2, 2048 ) < 0 ) 
+    if( Mix_OpenAudio( 44100, MIX_DEFAULT_FORMAT, 2, 2048 ) < 0 )
 		throw Mix_GetError();
 }
 
@@ -149,7 +150,7 @@ void playing1(SDL_Event& event){
 		if(event.type == SDL_QUIT) { gameState = Quit; break; }
         else if(gBoard.get_base0() <= 0 || gBoard.get_base1() <= 0) {
             gameState = GameOver;
-            break; 
+            break;
 		}
 		if(endTurnButton->getTriggered()){
 			endTurnButton->setTriggered(false);
@@ -209,7 +210,7 @@ void playing2(SDL_Event& event){
 		if(event.type == SDL_QUIT) { gameState = Quit; break; }
         else if(gBoard.get_base0() <= 0 || gBoard.get_base1() <= 0) {
             gameState = GameOver;
-            break; 
+            break;
 		}
 		if(endTurnButton->getTriggered()){
 			endTurnButton->setTriggered(false);
@@ -219,7 +220,7 @@ void playing2(SDL_Event& event){
 			break;
 		}
 		endTurnButton -> handleEvent(&event);
-		
+
 		for(int i = 0; i < 20; i++){
 			for(int j = 0; j < 20; j++){
 				if(tiles[i][j] -> getTriggered()){
@@ -271,16 +272,16 @@ void gameover(SDL_Event& event){
             gameState = Loading;
             restartButton->setTriggered(false);
             loadedSound.playSound(4, "BGM", -1);
-            break; 
+            break;
 		}
-        else if (event.type == SDL_QUIT) { 
-			gameState = Quit; 
-			break; 
+        else if (event.type == SDL_QUIT) {
+			gameState = Quit;
+			break;
 		}
         restartButton->handleEvent(&event);
-        if (event.type == SDL_QUIT) { 
-			gameState = Quit; 
-			break; 
+        if (event.type == SDL_QUIT) {
+			gameState = Quit;
+			break;
 		}
     }
     SDL_SetRenderDrawColor( gRenderer, 182, 196, 182, 0 );
@@ -340,7 +341,7 @@ void store1(SDL_Event& event){
 	}
     Store.resize(2000, 1200);
     Store.render(0, 0);
-    
+
     SDL_RenderPresent(gRenderer);
 }
 
@@ -385,7 +386,7 @@ void store2(SDL_Event& event){
 
     Store.resize(2000, 1200);
     Store.render(0, 0);
-    
+
     SDL_RenderPresent(gRenderer);
 }
 
