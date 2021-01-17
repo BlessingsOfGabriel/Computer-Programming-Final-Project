@@ -6,9 +6,8 @@ LoadedSound loadedSound;
 LoadedTexture::LoadedTexture() {
     free();
     _loadedTextures.clear();
-    // set all texture to load
-    std::string names[21] = {"Archer","Board","Buy", "Common", "GameOver1","GameOver2","goldtower","Knight","StartMenu","Soldier","Start","startagain","StartButton","Store","store2","Tower","Tutorial1","Tutorial2","Tutorial3","Tutorial4","Tutorial5"};
-    for (int i = 0;i < 21; i++) _toLoadFileName.push_back(names[i]);
+    std::string names[16] = {"Archer","Board", "Common", "GameOver1","GameOver2","GoldTower","Knight","StartMenu","Soldier","Store","Tower","Tutorial1","Tutorial2","Tutorial3","Tutorial4","Tutorial5"};
+    for (int i = 0;i < 16; i++) _toLoadFileName.push_back(names[i]);
 }
 
 LoadedTexture::~LoadedTexture() {
@@ -23,7 +22,6 @@ void LoadedTexture::free() {
     }
 }
 
-// load texture from file
 SDL_Texture* LoadedTexture::_loadTextureFromFile(std::string name) {
     try {
         SDL_Texture* newTexture = NULL;
@@ -41,19 +39,16 @@ SDL_Texture* LoadedTexture::_loadTextureFromFile(std::string name) {
     }
 }
 
-// load all texture and store in map
 void LoadedTexture::loadAllTexture() {
     for (int i = 0;i < _toLoadFileName.size(); i++) {
       _loadedTextures[_toLoadFileName[i]] = _loadTextureFromFile(_toLoadFileName[i]);
     }
 }
 
-// get texture from map
 SDL_Texture* LoadedTexture::getTexture(std::string name) {
     return _loadedTextures[name];
 }
 
-// LoadedSound
 LoadedSound::LoadedSound() {
     free();
     _loadedSound.clear();

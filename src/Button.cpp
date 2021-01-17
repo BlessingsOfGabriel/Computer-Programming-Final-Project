@@ -65,19 +65,3 @@ void Button::setTriggered(bool state) {
 bool Button::getTriggered() {
     return triggered;
 }
-
-/*void Button::update() {
-    switch(_buttonType) {
-        case Start: 
-			setPos((SCREEN_WIDTH - getWidth())/ 2, SCREEN_HEIGHT * 2 / 3); 
-			break;
-        case Restart: 
-			setPos((SCREEN_WIDTH - getWidth())/ 2, SCREEN_HEIGHT * 2 / 3); 
-			break;
-		case 
-        default: 
-			setPos(0, 0); 
-			break;
-    }
-    render(_posX, _posY);
-}*/

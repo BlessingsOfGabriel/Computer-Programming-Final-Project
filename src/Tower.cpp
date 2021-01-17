@@ -10,6 +10,7 @@ Tower::Tower(int faction):Unit(faction){
     _health = 3;
     _damage = 1;
     _name = "Tower";
+    loadTexture(_name);
 }
 
 Tower::~Tower(){}

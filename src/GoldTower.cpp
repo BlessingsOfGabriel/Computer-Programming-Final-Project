@@ -10,6 +10,7 @@ GoldTower::GoldTower(int faction):Unit(faction){
     _move = 0;
     _damage = 0;
     _name = "GoldTower";
+    loadTexture(_name);
 }
 
 GoldTower::~GoldTower(){}

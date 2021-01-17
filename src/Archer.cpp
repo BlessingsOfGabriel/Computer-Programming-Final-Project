@@ -11,6 +11,7 @@ Archer::Archer(int faction):Unit(faction){
     _damage = 2;
     _move = 1;
     _name = "Archer";
+    loadTexture(_name);
 }
 
 Archer::~Archer(){}

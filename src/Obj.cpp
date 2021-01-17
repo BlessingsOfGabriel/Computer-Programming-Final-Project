@@ -29,7 +29,7 @@ void Obj::resize(int newWidth,int newHeight){
     _width = newWidth;
 }
 
-void Obj::free() {
+void Obj::free(){
 	if (_texture != NULL) {
 		_texture = NULL;
 		_width = 0;

@@ -14,7 +14,7 @@ Status::Status(int x){
     _statusFaction = x;
     _turn = 0;
     _goldPerTurn = 5;
-    _goldAmount = 0;
+    _goldAmount = 900;
 }
 
 Status::~Status(){}

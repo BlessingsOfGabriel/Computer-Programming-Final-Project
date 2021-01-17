@@ -1,6 +1,7 @@
 #include"Board.h"
 #include "Obj.h"
 #include "Unit.h"
+#include "Archer.h"
 
 using namespace std;
 

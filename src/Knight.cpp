@@ -11,6 +11,7 @@ Knight::Knight(int faction):Unit(faction){
     _damage = 2;
     _move = 2;
     _name = "Knight";
+    loadTexture(_name);
 }
 
 Knight::~Knight(){}

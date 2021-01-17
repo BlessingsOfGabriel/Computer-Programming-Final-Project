@@ -279,7 +279,7 @@ void playing1(SDL_Event& event){
 	SDL_RenderClear( gRenderer );
     for(int i = 0; i < 20; i++){
         for(int j = 0; j < 20; j++){
-            tiles[i][j] -> resize(60, 60);
+            tiles[i][j] -> resize(SCREEN_HEIGHT / 20, SCREEN_HEIGHT / 20);
             std::pair<int, int>actPos = boardToAct(std::pair<int, int>(i, j));
 			tiles[i][j] -> setPos(actPos.first, actPos.second);
             tiles[i][j] -> render(actPos.first, actPos.second);
@@ -287,8 +287,16 @@ void playing1(SDL_Event& event){
     }
 	gBoard.resize(SCREEN_HEIGHT, SCREEN_HEIGHT);
 	gBoard.render((SCREEN_WIDTH - SCREEN_HEIGHT) / 2, 0);
-	Status1.update(SCREEN_WIDTH, SCREEN_HEIGHT);
-	Status2.update(SCREEN_WIDTH, SCREEN_HEIGHT);
+	for(int i = 0; i < 20; i++){
+		for(int j = 0; j < 20; j++){
+			std::pair<int, int> boardPos(i, j);
+			gBoard.getUnit(i, j) -> resize(SCREEN_HEIGHT / 20, SCREEN_HEIGHT / 20);
+			gBoard.getUnit(i, j) -> render(boardToAct(boardPos).first, boardToAct(boardPos).second);
+		}
+	}
+
+	//Status1.update(SCREEN_WIDTH, SCREEN_HEIGHT);
+	//Status2.update(SCREEN_WIDTH, SCREEN_HEIGHT);
 	SDL_RenderPresent( gRenderer );
 }
 
@@ -299,15 +307,12 @@ void playing2(SDL_Event& event){
             gameState = GameOver;
             break;
 		}
-		if(endTurnButton->getTriggered()){
-			endTurnButton->setTriggered(false);
+		if(event.key.keysym.sym == SDLK_e,event.key.type == SDL_KEYUP){
 			REGISTER.first = -1;
 			REGISTER.second = -1;
 			gameState = Playing_1;
 			break;
 		}
-		endTurnButton -> handleEvent(&event);
-
 		for(int i = 0; i < 20; i++){
 			for(int j = 0; j < 20; j++){
 				if(tiles[i][j] -> getTriggered()){
@@ -317,7 +322,7 @@ void playing2(SDL_Event& event){
 						    REGISTER.second = j;
                         }
 						if(gBoard.getUnit(i, j) -> getFaction() == -1){
-							gameState = Store_2;
+							gameState = Store_1;
 							break;
 						}
 						else
@@ -336,20 +341,34 @@ void playing2(SDL_Event& event){
 						}
 					}
 				}
-				tiles[i][j] -> handleEvent(&event);
+				tiles[i][j] -> setTriggered(false);
 			}
 		}
+		for(int i = 0; i < 20; i++)
+			for(int j = 0; j < 20; j++)
+				tiles[i][j] -> handleEvent(&event);
 	}
-
+	SDL_RenderClear( gRenderer );
     for(int i = 0; i < 20; i++){
         for(int j = 0; j < 20; j++){
-            tiles[i][j] -> resize(60, 60);
+            tiles[i][j] -> resize(SCREEN_HEIGHT / 20, SCREEN_HEIGHT / 20);
             std::pair<int, int>actPos = boardToAct(std::pair<int, int>(i, j));
+			tiles[i][j] -> setPos(actPos.first, actPos.second);
             tiles[i][j] -> render(actPos.first, actPos.second);
         }
     }
-	gBoard.resize(1200, 1200);
-	gBoard.render(400, 0);
+	gBoard.resize(SCREEN_HEIGHT, SCREEN_HEIGHT);
+	gBoard.render((SCREEN_WIDTH - SCREEN_HEIGHT) / 2, 0);
+	for(int i = 0; i < 20; i++){
+		for(int j = 0; j < 20; j++){
+			std::pair<int, int> boardPos(i, j);
+			gBoard.getUnit(i, j) -> resize(SCREEN_HEIGHT / 20, SCREEN_HEIGHT / 20);
+			gBoard.getUnit(i, j) -> render(boardToAct(boardPos).first, boardToAct(boardPos).second);
+		}
+	}
+
+	//Status1.update(SCREEN_WIDTH, SCREEN_HEIGHT);
+	//Status2.update(SCREEN_WIDTH, SCREEN_HEIGHT);
 	SDL_RenderPresent( gRenderer );
 }
 
@@ -383,6 +402,9 @@ void store1(SDL_Event& event){
 			Unit* a = new Soldier(0);
 			gBoard.add_unit(REGISTER.first, REGISTER.second, a);
 			gameState = Playing_1;
+			tiles[REGISTER.first][REGISTER.second] -> setTriggered(false);
+			REGISTER.first = -1;
+			REGISTER.second = -1;
 			buy[0] -> setTriggered(false);
 			break;
 		}
@@ -390,6 +412,9 @@ void store1(SDL_Event& event){
 			Unit* a = new Archer(0);
 			gBoard.add_unit(REGISTER.first, REGISTER.second, a);
 			gameState = Playing_1;
+			tiles[REGISTER.first][REGISTER.second] -> setTriggered(false);
+			REGISTER.first = -1;
+			REGISTER.second = -1;
 			buy[1] -> setTriggered(false);
 			break;
 		}
@@ -397,6 +422,9 @@ void store1(SDL_Event& event){
 			Unit* a = new Knight(0);
 			gBoard.add_unit(REGISTER.first, REGISTER.second, a);
 			gameState = Playing_1;
+			tiles[REGISTER.first][REGISTER.second] -> setTriggered(false);
+			REGISTER.first = -1;
+			REGISTER.second = -1;
 			buy[2] -> setTriggered(false);
 			break;
 		}
@@ -404,6 +432,9 @@ void store1(SDL_Event& event){
 			Unit* a = new Tower(0);
 			gBoard.add_unit(REGISTER.first, REGISTER.second, a);
 			gameState = Playing_1;
+			tiles[REGISTER.first][REGISTER.second] -> setTriggered(false);
+			REGISTER.first = -1;
+			REGISTER.second = -1;
 			buy[3] -> setTriggered(false);
 			break;
 		}
@@ -411,6 +442,9 @@ void store1(SDL_Event& event){
 			Unit* a = new GoldTower(0);
 			gBoard.add_unit(REGISTER.first, REGISTER.second, a);
 			gameState = Playing_1;
+			tiles[REGISTER.first][REGISTER.second] -> setTriggered(false);
+			REGISTER.first = -1;
+			REGISTER.second = -1;
 			buy[4] -> setTriggered(false);
 			break;
 		}
@@ -429,11 +463,14 @@ void store1(SDL_Event& event){
 }
 
 void store2(SDL_Event& event){
-	while( SDL_PollEvent(&event) != 0 ){
+	while(SDL_PollEvent(&event) != 0 ){
 		if(buy[0] -> getTriggered() && Status2.valid_buy(0)){
 			Unit* a = new Soldier(1);
 			gBoard.add_unit(REGISTER.first, REGISTER.second, a);
 			gameState = Playing_2;
+			tiles[REGISTER.first][REGISTER.second] -> setTriggered(false);
+			REGISTER.first = -1;
+			REGISTER.second = -1;
 			buy[0] -> setTriggered(false);
 			break;
 		}
@@ -441,6 +478,9 @@ void store2(SDL_Event& event){
 			Unit* a = new Archer(1);
 			gBoard.add_unit(REGISTER.first, REGISTER.second, a);
 			gameState = Playing_2;
+			tiles[REGISTER.first][REGISTER.second] -> setTriggered(false);
+			REGISTER.first = -1;
+			REGISTER.second = -1;
 			buy[1] -> setTriggered(false);
 			break;
 		}
@@ -448,6 +488,9 @@ void store2(SDL_Event& event){
 			Unit* a = new Knight(1);
 			gBoard.add_unit(REGISTER.first, REGISTER.second, a);
 			gameState = Playing_2;
+			tiles[REGISTER.first][REGISTER.second] -> setTriggered(false);
+			REGISTER.first = -1;
+			REGISTER.second = -1;
 			buy[2] -> setTriggered(false);
 			break;
 		}
@@ -455,6 +498,9 @@ void store2(SDL_Event& event){
 			Unit* a = new Tower(1);
 			gBoard.add_unit(REGISTER.first, REGISTER.second, a);
 			gameState = Playing_2;
+			tiles[REGISTER.first][REGISTER.second] -> setTriggered(false);
+			REGISTER.first = -1;
+			REGISTER.second = -1;
 			buy[3] -> setTriggered(false);
 			break;
 		}
@@ -462,14 +508,23 @@ void store2(SDL_Event& event){
 			Unit* a = new GoldTower(1);
 			gBoard.add_unit(REGISTER.first, REGISTER.second, a);
 			gameState = Playing_2;
+			tiles[REGISTER.first][REGISTER.second] -> setTriggered(false);
+			REGISTER.first = -1;
+			REGISTER.second = -1;
 			buy[4] -> setTriggered(false);
 			break;
 		}
+		for(int i = 0; i < 5; i++)
+			buy[i] -> handleEvent(&event);
 	}
 
-    Store.resize(2000, 1200);
+    Store.resize(SCREEN_WIDTH, SCREEN_HEIGHT);
     Store.render(0, 0);
-
+	for(int i = 0; i < 5; i++){
+		buy[i] -> setPos(SCREEN_WIDTH * i / 5, SCREEN_HEIGHT * 3 / 4);
+		buy[i] -> resize(SCREEN_WIDTH / 5, SCREEN_WIDTH / 10);
+		buy[i] -> render(SCREEN_WIDTH * i / 5, SCREEN_HEIGHT * 3 / 4);
+	}
     SDL_RenderPresent(gRenderer);
 }
 

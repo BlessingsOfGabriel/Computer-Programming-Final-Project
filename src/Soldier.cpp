@@ -11,6 +11,7 @@ Soldier::Soldier(int faction):Unit(faction){
     _damage = 1;
     _move = 2;
     _name = "Soldier";
+    loadTexture(_name);
 }
 
 Soldier::~Soldier(){}
