@@ -24,7 +24,7 @@ int Obj::getWidth(){
     return _width;
 }
 
-void Obj::resize(int newHeight,int newWidth){
+void Obj::resize(int newWidth,int newHeight){
     _height = newHeight;
     _width = newWidth;
 }

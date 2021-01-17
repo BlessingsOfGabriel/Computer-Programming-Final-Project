@@ -120,9 +120,8 @@ void menu(SDL_Event& event){
     }
     SDL_SetRenderDrawColor( gRenderer, 182, 196, 182, 0 );
     SDL_RenderClear( gRenderer );
+	StartMenu.resize(SCREEN_WIDTH, SCREEN_HEIGHT);
     StartMenu.render(0, 0);
-	system("PAUSE");
-    StartMenu.resize(SCREEN_WIDTH, SCREEN_HEIGHT);
     SDL_RenderPresent( gRenderer );
 }
 
