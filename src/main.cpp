@@ -25,7 +25,7 @@ Button* buy[5];
 Board gBoard;
 Status Status1(0), Status2(1);
 Obj StartMenu, Load, Store, GameOver1, GameOver2;
-std::pair<int, int> REGISTER;
+std::pair<int, int> REGISTER(-1, -1);
 std::pair<int, int> boardToAct(std::pair<int, int>);
 void initialize();
 void loadMedia();
@@ -243,7 +243,7 @@ void playing1(SDL_Event& event){
 		for(int i = 0; i < 20; i++){
 			for(int j = 0; j < 20; j++){
 				if(tiles[i][j] -> getTriggered()){
-					if(REGISTER.first == -1, REGISTER.second == -1){
+					if(REGISTER.first == -1 && REGISTER.second == -1){
                         if(gBoard.getUnit(i, j) -> getFaction() != 1){
 						    REGISTER.first = i;
 						    REGISTER.second = j;
@@ -306,7 +306,7 @@ void playing2(SDL_Event& event){
 		for(int i = 0; i < 20; i++){
 			for(int j = 0; j < 20; j++){
 				if(tiles[i][j] -> getTriggered()){
-					if(REGISTER.first == -1, REGISTER.second == -1){
+					if(REGISTER.first == -1 && REGISTER.second == -1){
                         if(gBoard.getUnit(i, j) -> getFaction() != 0){
 						    REGISTER.first = i;
 						    REGISTER.second = j;
@@ -374,35 +374,35 @@ void gameover(SDL_Event& event){
 
 void store1(SDL_Event& event){
 	while( SDL_PollEvent(&event) != 0 ){
-		if(buy[0] -> getTriggered()){
+		if(buy[0] -> getTriggered() && Status1.valid_buy(0)){
 			Unit* a = new Soldier(0);
 			gBoard.add_unit(REGISTER.first, REGISTER.second, a);
 			gameState = Playing_1;
 			buy[0] -> setTriggered(false);
 			break;
 		}
-        if(buy[1] -> getTriggered()){
+        if(buy[1] -> getTriggered() && Status1.valid_buy(1)){
 			Unit* a = new Archer(0);
 			gBoard.add_unit(REGISTER.first, REGISTER.second, a);
 			gameState = Playing_1;
 			buy[1] -> setTriggered(false);
 			break;
 		}
-        if(buy[2] -> getTriggered()){
+        if(buy[2] -> getTriggered() && Status1.valid_buy(2)){
 			Unit* a = new Knight(0);
 			gBoard.add_unit(REGISTER.first, REGISTER.second, a);
 			gameState = Playing_1;
 			buy[2] -> setTriggered(false);
 			break;
 		}
-        if(buy[3] -> getTriggered()){
+        if(buy[3] -> getTriggered() && Status1.valid_buy(3)){
 			Unit* a = new Tower(0);
 			gBoard.add_unit(REGISTER.first, REGISTER.second, a);
 			gameState = Playing_1;
 			buy[3] -> setTriggered(false);
 			break;
 		}
-        if(buy[4] -> getTriggered()){
+        if(buy[4] -> getTriggered() && Status1.valid_buy(4)){
 			Unit* a = new GoldTower(0);
 			gBoard.add_unit(REGISTER.first, REGISTER.second, a);
 			gameState = Playing_1;
@@ -417,21 +417,21 @@ void store1(SDL_Event& event){
 
 void store2(SDL_Event& event){
 	while( SDL_PollEvent(&event) != 0 ){
-		if(buy[0] -> getTriggered()){
+		if(buy[0] -> getTriggered() && Status2.valid_buy(0)){
 			Unit* a = new Soldier(1);
 			gBoard.add_unit(REGISTER.first, REGISTER.second, a);
 			gameState = Playing_2;
 			buy[0] -> setTriggered(false);
 			break;
 		}
-        if(buy[1] -> getTriggered()){
+        if(buy[1] -> getTriggered() && Status2.valid_buy(0)){
 			Unit* a = new Archer(1);
 			gBoard.add_unit(REGISTER.first, REGISTER.second, a);
 			gameState = Playing_2;
 			buy[1] -> setTriggered(false);
 			break;
 		}
-        if(buy[2] -> getTriggered()){
+        if(buy[2] -> getTriggered() && Status2.valid_buy(0)){
 			Unit* a = new Knight(1);
 			gBoard.add_unit(REGISTER.first, REGISTER.second, a);
 			gameState = Playing_2;
